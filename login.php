@@ -11,7 +11,7 @@
         $password = $_POST['password'];
         $query = "SELECT * FROM `users` WHERE login='$userName' AND `password`='$password'";
 
-        if ($result = $connection->query($sql)) {
+        if ($result = $connection->query($query)) {
             $users = $result->num_rows;
             if ($users > 0) {
                 $row = $result->fetch_assoc();
