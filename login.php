@@ -1,5 +1,6 @@
 <?php
     require_once "connect.php";
+    session_start();
 
     $connection = @new mysqli($host, $db_user, $db_password, $db_name);
 
@@ -15,9 +16,13 @@
             $users = $result->num_rows;
             if ($users > 0) {
                 $row = $result->fetch_assoc();
-                $user = $row['login'];
+                $_SESSION['user'] = $row['login'];
+                $_SESSION['description'] = $row['description'];
+                $_SESSION['email'] = $row['email'];
+                $_SESSION['name'] = $row['name'];
+                $_SESSION['surname'] = $row['surname'];
                 $result->close();
-                echo $user;
+                header('Location: ./user/user.php');
             } else {
 
             }
