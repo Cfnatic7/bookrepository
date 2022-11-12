@@ -21,6 +21,7 @@
                 $_SESSION['email'] = $row['email'];
                 $_SESSION['name'] = $row['name'];
                 $_SESSION['surname'] = $row['surname'];
+                unset($_SESSION['error']);
                 $result->close();
                 header('Location: ./user/user.php');
             } else {

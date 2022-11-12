@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +13,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
-    <script src="./index.js" defer></script>
+    <?php
+        if (isset($_SESSION['error']) && $_SESSION['error'] == 'Nieprawidłowy login lub hasło') {
+            echo "<script src='./error-login-index.js' defer></script>";
+        }
+        else if (isset($_SESSION['error'])) {
+            echo "<script src='./error-register-index.js' defer></script>";
+        }
+        else echo "<script src='./index.js' defer></script>";
+    ?>
+    
     <title>Book repository</title>
 </head>
 <body>
@@ -41,6 +54,12 @@
             <div>
                 <button type="submit" id="login">Login</button>
             </div>
+            <?php
+                if (isset($_SESSION['error'])) {
+                    echo "<p style='color:red; font-family: Arial, Helvetica, sans-serif; text-align: center; width:100%'>"
+                    .$_SESSION['error']."</p>";
+                }
+            ?>
         </form>
         <form class = 'register-form' id = 'register-form' method="POST"> 
             <div> 

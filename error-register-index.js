@@ -2,8 +2,8 @@ const loginForm = document.getElementById('login-form');
 const registerForm = document.getElementById('register-form');
 const welcomeText = document.getElementById('welcome-text');
 
+welcomeText.style.display = 'none';
 loginForm.style.display = 'none';
-registerForm.style.display = 'none';
 
 
 
