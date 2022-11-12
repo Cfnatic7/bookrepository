@@ -8,6 +8,11 @@
         echo "Error: ".$connection->connect_errno."Description: ".$connection->connect_error;
     }
     else {
+
+        if (!isset($_POST['username']) || !isset($_POST['password'])) {
+            header('Location: index.php');
+            exit();
+        }
         $userName = $_POST['username'];
         $password = $_POST['password'];
         $query = "SELECT * FROM `users` WHERE login='$userName' AND `password`='$password'";

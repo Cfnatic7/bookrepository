@@ -1,3 +1,12 @@
+<?php 
+    session_start();
+    if (!isset($_SESSION['loggedIn'])) {
+        header('Location: ../index.php');
+        exit();
+    }
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +23,6 @@
 </head>
 <body>
     <?php
-        session_start();
         echo"<header>
                 <div>
                     <h2 class='header-text'>
