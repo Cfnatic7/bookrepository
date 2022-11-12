@@ -24,7 +24,8 @@
                 $result->close();
                 header('Location: ./user/user.php');
             } else {
-
+                $_SESSION['error'] = 'Nieprawidłowy login lub hasło';
+                header('Location: index.php');
             }
         }
 
