@@ -16,6 +16,8 @@
             $users = $result->num_rows;
             if ($users > 0) {
                 $row = $result->fetch_assoc();
+                $_SESSION['loggedIn'] = true;
+                $_SESSION['id'] = $row->id;
                 $_SESSION['user'] = $row['login'];
                 $_SESSION['description'] = $row['description'];
                 $_SESSION['email'] = $row['email'];
