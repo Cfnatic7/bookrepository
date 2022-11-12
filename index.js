@@ -1,16 +1,16 @@
 const chooseLoginOnCLick = () => {
     let main = document.getElementById('main');
     main.innerHTML = 
-    `<form class = 'login-form' method="POST"> 
+    `<form class = 'login-form' action="login.php" method="POST"> 
         <div> 
             <span>Username</span>
             <input type="text" name="username"
-            minlength="8" required>
+            minlength="8" maxlength="20" required>
         </div>
         <div>
             <span>Password</span>
             <input type="password" name="password" 
-            minlength="8" required>
+            minlength="8" maxlength="20" required>
         </div>
         <div>
             <button type="submit" id="login">Login</button>
@@ -25,27 +25,28 @@ const chooseRegisterOnClick = () => {
         <div> 
             <span>Name</span>
             <input type="text" name="username"
-            minlength="2" required>
+            minlength="2" maxlength="20" required>
         </div>
         <div> 
             <span>Surname</span>
             <input type="text" name="username"
-            minlength="2" required>
+            minlength="2" maxlength="20" required>
         </div>
         <div> 
             <span>email</span>
             <input type="email" name="username"
+            maxlength="40"
             required>
         </div>
         <div> 
             <span>Username</span>
             <input type="text" name="username"
-            minlength="8" required>
+            minlength="8" maxlength="20" required>
         </div>
         <div>
             <span>Password</span>
             <input type="password" name="password" 
-            minlength="8" required>
+            minlength="8" maxlength="20" required>
         </div>
         <div>
             <button type="submit" id="register">Register</button>
