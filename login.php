@@ -15,9 +15,13 @@
         }
         $userName = $_POST['username'];
         $password = $_POST['password'];
-        $query = "SELECT * FROM `users` WHERE login='$userName' AND `password`='$password'";
 
-        if ($result = $connection->query($query)) {
+        $userName = htmlentities($userName, ENT_QUOTES, 'UTF-8');
+        $password = htmlentities($password, ENT_QUOTES, 'UTF-8');
+
+        if ($result = $connection->query(sprintf("SELECT * FROM `users` 
+        WHERE login='%s' AND `password`='%s'", mysqli_real_escape_string($connection, $userName),
+        mysqli_real_escape_string($connection, $password)))) {
             $users = $result->num_rows;
             if ($users > 0) {
                 $row = $result->fetch_assoc();
