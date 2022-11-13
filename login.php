@@ -17,26 +17,30 @@
         $password = $_POST['password'];
 
         $userName = htmlentities($userName, ENT_QUOTES, 'UTF-8');
-        $password = htmlentities($password, ENT_QUOTES, 'UTF-8');
 
         if ($result = $connection->query(sprintf("SELECT * FROM `users` 
-        WHERE login='%s' AND `password`='%s'", mysqli_real_escape_string($connection, $userName),
-        mysqli_real_escape_string($connection, $password)))) {
+        WHERE login='%s' AND `password`='%s'", mysqli_real_escape_string($connection, $userName)))) {
             $users = $result->num_rows;
             if ($users > 0) {
                 $row = $result->fetch_assoc();
-                $_SESSION['loggedIn'] = true;
-                $_SESSION['id'] = $row->id;
-                $_SESSION['user'] = $row['login'];
-                $_SESSION['description'] = $row['description'];
-                $_SESSION['email'] = $row['email'];
-                $_SESSION['name'] = $row['name'];
-                $_SESSION['surname'] = $row['surname'];
-                unset($_SESSION['error']);
-                $result->close();
-                header('Location: ./user/user.php');
+                if (password_verify($password, $row['password']) == true) {
+                    $_SESSION['loggedIn'] = true;
+                    $_SESSION['id'] = $row->id;
+                    $_SESSION['user'] = $row['login'];
+                    $_SESSION['description'] = $row['description'];
+                    $_SESSION['email'] = $row['email'];
+                    $_SESSION['name'] = $row['name'];
+                    $_SESSION['surname'] = $row['surname'];
+                    unset($_SESSION['error']);
+                    $result->close();
+                    header('Location: ./user/user.php');
+                }
+                else {
+                    $_SESSION['error'] = 'Incorrect login or password';
+                    header('Location: index.php');
+                }
             } else {
-                $_SESSION['error'] = 'Nieprawidłowy login lub hasło';
+                $_SESSION['error'] = 'Incorrect login or password';
                 header('Location: index.php');
             }
         }
