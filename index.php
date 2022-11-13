@@ -124,6 +124,17 @@
                     }
                 ?>
             <div>
+                <span>Repeat password</span>
+                <input type='password' name='password2' 
+                minlength='8' maxlength='20' required>
+            </div>
+            <?php
+                    if (isset($_SESSION['e_password'])) {
+                        echo "<p style='padding-right:7%;color:red; font-family: Arial, Helvetica, sans-serif; text-align: right; width:100%'>"
+                        .$_SESSION['e_password']."</p>";
+                    }
+                ?>
+            <div>
                 <button type='submit' id='register'>Register</button>
             </div>
         </form>
