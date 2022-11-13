@@ -51,7 +51,12 @@
         <form class = 'login-form' id = 'login-form' action="login.php" method="POST"> 
             <div> 
                 <span>Username</span>
-                <input type="text" name="login"
+                <input type="text" name="login" value = "<?php 
+                    if (isset($_SESSION['lfUserName'])) {
+                        echo $_SESSION['lfUserName'];
+                        unset($_SESSION['lfUserName']);
+                    }
+                ?>"
                 minlength="8" maxlength="20" required>
             </div>
             <div>
@@ -72,7 +77,10 @@
         <form class = 'register-form' id = 'register-form' method='POST' action='register.php'> 
             <div> 
                 <span>Name</span>
-                <input type='text' name='name'
+                <input type='text' name='name' value = "<?php if(isset($_SESSION['rfName'])) {
+                    echo $_SESSION['rfName'];
+                    unset($_SESSION['rfName']);
+                }?>"
                 minlength='2' maxlength='20' required>
             </div>
             <?php
@@ -83,7 +91,10 @@
                 ?>
             <div> 
                 <span>Surname</span>
-                <input type='text' name='surname'
+                <input type='text' name='surname' value = "<?php if(isset($_SESSION['rfSurname'])) {
+                    echo $_SESSION['rfSurname'];
+                    unset($_SESSION['rfSurname']);
+                }?>"
                 minlength='2' maxlength='20' required>
 
             </div>
@@ -95,7 +106,10 @@
                 ?>
             <div> 
                 <span>email</span>
-                <input type='email' name='email'
+                <input type='email' name='email' value = "<?php if(isset($_SESSION['rfEmail'])) {
+                    echo $_SESSION['rfEmail'];
+                    unset($_SESSION['rfEmail']);
+                }?>"
                 maxlength='40'
                 required>
             </div>
@@ -107,7 +121,10 @@
                 ?>
             <div> 
                 <span>Username</span>
-                <input type='text' name='username'
+                <input type='text' name='username' value = "<?php if(isset($_SESSION['rfUserName'])) {
+                    echo $_SESSION['rfUserName'];
+                    unset($_SESSION['rfUserName']);
+                }?>"
                 minlength='8' maxlength='20' required>
             </div>
             <?php

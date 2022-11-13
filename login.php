@@ -37,10 +37,12 @@
                 }
                 else {
                     $_SESSION['error'] = 'Incorrect login or password';
+                    $_SESSION['lfUserName'] = $userName;
                     header('Location: index.php');
                 }
             } else {
                 $_SESSION['error'] = 'Incorrect login or password';
+                $_SESSION['lfUserName'] = $userName;
                 header('Location: index.php');
             }
         }

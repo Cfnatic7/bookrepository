@@ -128,6 +128,14 @@
                     header('location: index.php');
                 }
 
+                $_SESSION['rfUserName'] = $userName;
+
+                $_SESSION['rfEmail'] = $email;
+
+                $_SESSION['rfName'] = $name;
+
+                $_SESSION['rfSurname'] = $surname;
+
                 $result->close();
 
                 $connection->close();
