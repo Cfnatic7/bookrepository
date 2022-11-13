@@ -9,11 +9,11 @@
     }
     else {
 
-        if (!isset($_POST['username']) || !isset($_POST['password'])) {
+        if (!isset($_POST['login']) || !isset($_POST['password'])) {
             header('Location: index.php');
             exit();
         }
-        $userName = $_POST['username'];
+        $userName = $_POST['login'];
         $password = $_POST['password'];
 
         $userName = htmlentities($userName, ENT_QUOTES, 'UTF-8');

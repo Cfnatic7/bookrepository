@@ -47,7 +47,7 @@
         <form class = 'login-form' id = 'login-form' action="login.php" method="POST"> 
             <div> 
                 <span>Username</span>
-                <input type="text" name="username"
+                <input type="text" name="login"
                 minlength="8" maxlength="20" required>
             </div>
             <div>
@@ -65,35 +65,66 @@
                 }
             ?>
         </form>
-        <form class = 'register-form' id = 'register-form' method="POST"> 
+        <form class = 'register-form' id = 'register-form' method='POST' action='register.php'> 
             <div> 
                 <span>Name</span>
-                <input type="text" name="username"
-                minlength="2" maxlength="20" required>
+                <input type='text' name='name'
+                minlength='2' maxlength='20' required>
             </div>
+            <?php
+                    if (isset($_SESSION['e_name'])) {
+                        echo "<p style='padding-right:7%;color:red; font-family: Arial, Helvetica, sans-serif; text-align: right; width:100%'>"
+                        .$_SESSION['e_name']."</p>";
+                    }
+                ?>
             <div> 
                 <span>Surname</span>
-                <input type="text" name="username"
-                minlength="2" maxlength="20" required>
+                <input type='text' name='surname'
+                minlength='2' maxlength='20' required>
+
             </div>
+            <?php
+                    if (isset($_SESSION['e_surname'])) {
+                        echo "<p style='padding-right:7%;color:red; font-family: Arial, Helvetica, sans-serif; text-align: right; width:100%'>"
+                        .$_SESSION['e_surname']."</p>";
+                    }
+                ?>
             <div> 
                 <span>email</span>
-                <input type="email" name="username"
-                maxlength="40"
+                <input type='email' name='email'
+                maxlength='40'
                 required>
             </div>
+            <?php
+                    if (isset($_SESSION['e_email'])) {
+                        echo "<p style='padding-right:7%;color:red; font-family: Arial, Helvetica, sans-serif; text-align: right; width:100%'>"
+                        .$_SESSION['e_email']."</p>";
+                    }
+                ?>
             <div> 
                 <span>Username</span>
-                <input type="text" name="username"
-                minlength="8" maxlength="20" required>
+                <input type='text' name='username'
+                minlength='8' maxlength='20' required>
             </div>
+            <?php
+                    if (isset($_SESSION['e_username'])) {
+                        echo "<p style='padding-right:7%;color:red; font-family: Arial, Helvetica, sans-serif; text-align: right; width:100%'>"
+                        .$_SESSION['e_username']."</p>";
+                    }
+                ?>
             <div>
                 <span>Password</span>
-                <input type="password" name="password" 
-                minlength="8" maxlength="20" required>
+                <input type='password' name='password' 
+                minlength='8' maxlength='20' required>
             </div>
+            <?php
+                    if (isset($_SESSION['e_password'])) {
+                        echo "<p style='padding-right:7%;color:red; font-family: Arial, Helvetica, sans-serif; text-align: right; width:100%'>"
+                        .$_SESSION['e_password']."</p>";
+                    }
+                ?>
             <div>
-                <button type="submit" id="register">Register</button>
+                <button type='submit' id='register'>Register</button>
             </div>
         </form>
 
