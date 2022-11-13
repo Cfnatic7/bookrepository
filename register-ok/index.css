@@ -1,0 +1,131 @@
+* {
+    box-sizing: border-box;
+}
+
+/* header */ 
+
+header {
+    position: fixed;
+    width: 100vw;
+    background-color: #381172;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1;
+}
+
+header div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 50%;
+}
+
+header h2 {
+    font-family: 'Caveat', cursive;
+    color: whitesmoke;
+}
+
+
+/* main */ 
+
+main {
+    height: 100vh;
+    width: 100vw;
+    z-index: 0;
+    color:rgb(31, 106, 81);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* forms */ 
+
+input,
+select,
+textarea {
+  border: 2px solid #333;
+  background-color: white;
+  border-radius: 0.25rem;
+}
+
+/* login form */ 
+
+.form
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select,
+textarea {
+  font: 1.25rem / 1.5 sans-serif;
+  display: block;
+  box-sizing: border-box;
+  width: 50%;
+  height: 2rem;
+  padding: 0.5rem 0.75rem;
+}
+
+.form {
+    background-color: rgb(14, 79, 105);
+    height: 30%;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    border-radius: 1rem;
+}
+
+.form span {
+    color:whitesmoke;
+    font-family: 'Caveat', cursive;
+    margin: 7px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    width: 100%;
+    text-align: center;
+}
+
+.form div {
+    width:100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.form button[type="submit"] {
+    font-family: 'Caveat', cursive;
+    font-size: 1.5rem;
+    background-color: rgb(200, 194, 194);
+    opacity: 0.85;
+    transition: 0.3s;
+    height: fit-content;
+    width: fit-content;
+    border: none;
+    border-radius: 0.1rem;
+    margin: 0.5rem;
+    color:rgb(31, 106, 81);
+    transition: 0.3s;
+    transition-property: background-color;
+}
+
+.form button[type="submit"]:hover {
+    background-color:white;
+    cursor: pointer;
+}
+
+ /* footer */
+
+footer {
+    width: 100vw;
+    height:10vh;
+    bottom: 0;
+    position: fixed;
+    z-index: 1;
+    background-color: #381172;
+    color: gainsboro;
+    display: flex;
+    height: 7vh;
+    align-items: center;
+    justify-content: center;
+}

@@ -113,8 +113,9 @@
                     unset($_SESSION['error']);
 
                     if ($connection->query("INSERT INTO `users` VALUES(NULL, '$userName', '$hashedPassword', 
-                    '$email', '$name', '$surname', NULL, NULL)")) {
+                    '$email', '$name', '$surname', NULL, 'user')")) {
                         $_SESSION['registered']=true;
+                        header("Location: ./register-ok/index.php");
                     }
                     else {
                         $_SESSION['registered'] = false;

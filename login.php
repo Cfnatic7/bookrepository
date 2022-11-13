@@ -19,7 +19,7 @@
         $userName = htmlentities($userName, ENT_QUOTES, 'UTF-8');
 
         if ($result = $connection->query(sprintf("SELECT * FROM `users` 
-        WHERE login='%s' AND `password`='%s'", mysqli_real_escape_string($connection, $userName)))) {
+        WHERE login='%s'", mysqli_real_escape_string($connection, $userName)))) {
             $users = $result->num_rows;
             if ($users > 0) {
                 $row = $result->fetch_assoc();

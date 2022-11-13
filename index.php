@@ -24,6 +24,10 @@
         else if (isset($_SESSION['error'])) {
             echo "<script src='./error-register-index.js' defer></script>";
         }
+        else if (isset($_SESSION['goToLogin']) && $_SESSION['goToLogin'] == true) {
+            echo "<script src='./error-login-index.js' defer></script>";
+            unset($_SESSION['goToLogin']);
+        }
         else echo "<script src='./index.js' defer></script>";
     ?>
     
@@ -59,7 +63,7 @@
                 <button type="submit" id="login">Login</button>
             </div>
             <?php
-                if (isset($_SESSION['error'])) {
+                if (isset($_SESSION['error']) && $_SESSION['error'] == 'Incorrect login or password') {
                     echo "<p style='color:red; font-family: Arial, Helvetica, sans-serif; text-align: center; width:100%'>"
                     .$_SESSION['error']."</p>";
                 }
@@ -73,7 +77,7 @@
             </div>
             <?php
                     if (isset($_SESSION['e_name'])) {
-                        echo "<p style='padding-right:7%;color:red; font-family: Arial, Helvetica, sans-serif; text-align: right; width:100%'>"
+                        echo "<p style='margin:0;padding-right:7%;color:red; font-family: Arial, Helvetica, sans-serif; text-align: right; width:100%'>"
                         .$_SESSION['e_name']."</p>";
                     }
                 ?>
@@ -85,7 +89,7 @@
             </div>
             <?php
                     if (isset($_SESSION['e_surname'])) {
-                        echo "<p style='padding-right:7%;color:red; font-family: Arial, Helvetica, sans-serif; text-align: right; width:100%'>"
+                        echo "<p style='margin:0;padding-right:7%;color:red; font-family: Arial, Helvetica, sans-serif; text-align: right; width:100%'>"
                         .$_SESSION['e_surname']."</p>";
                     }
                 ?>
@@ -97,7 +101,7 @@
             </div>
             <?php
                     if (isset($_SESSION['e_email'])) {
-                        echo "<p style='padding-right:7%;color:red; font-family: Arial, Helvetica, sans-serif; text-align: right; width:100%'>"
+                        echo "<p style='margin:0;padding-right:7%;color:red; font-family: Arial, Helvetica, sans-serif; text-align: right; width:100%'>"
                         .$_SESSION['e_email']."</p>";
                     }
                 ?>
@@ -108,7 +112,7 @@
             </div>
             <?php
                     if (isset($_SESSION['e_username'])) {
-                        echo "<p style='padding-right:7%;color:red; font-family: Arial, Helvetica, sans-serif; text-align: right; width:100%'>"
+                        echo "<p style='margin:0;padding-right:7%;color:red; font-family: Arial, Helvetica, sans-serif; text-align: right; width:100%'>"
                         .$_SESSION['e_username']."</p>";
                     }
                 ?>
@@ -119,7 +123,7 @@
             </div>
             <?php
                     if (isset($_SESSION['e_password'])) {
-                        echo "<p style='padding-right:7%;color:red; font-family: Arial, Helvetica, sans-serif; text-align: right; width:100%'>"
+                        echo "<p style='margin:0;padding-right:7%;color:red; font-family: Arial, Helvetica, sans-serif; text-align: right; width:100%'>"
                         .$_SESSION['e_password']."</p>";
                     }
                 ?>
@@ -130,7 +134,7 @@
             </div>
             <?php
                     if (isset($_SESSION['e_password'])) {
-                        echo "<p style='padding-right:7%;color:red; font-family: Arial, Helvetica, sans-serif; text-align: right; width:100%'>"
+                        echo "<p style='margin:0;padding-right:7%;color:red; font-family: Arial, Helvetica, sans-serif; text-align: right; width:100%'>"
                         .$_SESSION['e_password']."</p>";
                     }
                 ?>
