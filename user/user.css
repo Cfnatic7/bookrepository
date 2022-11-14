@@ -39,6 +39,8 @@ header form input {
     border-radius: 1.5rem;
     border: none;
     width:93%;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 header form input::placeholder {

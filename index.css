@@ -63,12 +63,19 @@ main {
     align-items: center;
 }
 
-#welcome-text {
+.welcome-text {
     text-align: center;
     font-size: 3rem;
     top: 4rem;
     font-family: 'Caveat', cursive;
     color: black;
+}
+
+.sexy-underline {
+    fill:rgb(37, 165, 137);
+    position: relative;
+    bottom: 1rem;
+    opacity: 0.8;
 }
 
 /* forms */ 
