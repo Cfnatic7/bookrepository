@@ -19,20 +19,30 @@
     <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./user.css">
     <script src = './user.js' defer></script>
+    <script src="https://kit.fontawesome.com/8eaacae2ec.js" crossorigin="anonymous"></script>
     <title>Document</title>
 </head>
 <body>
-    <?php
-        echo"<header>
-                <div>
-                    <h2 class='header-text'>
-                        Welcome ".$_SESSION['user']."!
-                    </h2>
-                </div>
-                <div>
-                    <button type='button' onclick='logoutOnClick()' class='logout-button'>Logout</button>
-                </div>
-            </header>";
-    ?>
+    <header>
+        <div>
+            <h2 class='header-text'>
+                    <?php  echo  "Welcome ".$_SESSION['user']."!"; ?>
+            </h2>
+        </div>
+
+        <form method='GET' action='search-books.php' id='search-books'> 
+            <input type = 'text' placeholder='search books'> 
+
+            </input>
+            <button type='submit' id='search-books-button'>
+                <i class="fa-solid fa-magnifying-glass">
+                </i>
+            </button>
+        </form>
+        <div>
+            <button type='button' onclick='logoutOnClick()' class='logout-button'>Logout</button>
+        </div>
+    </header>
+    
 </body>
 </html>
