@@ -209,6 +209,29 @@
                     }
                 }
             ?>
+
+            <?php 
+                if (isset($_GET['remove-user'])) {
+                    $email = $_GET['remove-user'];
+                    clearGets();
+                    try {
+                        $connection = new mysqli($host, $db_user, $db_password, $db_name);
+                        if ($connection->errno != 0) {
+                            throw new Exception(mysqli_connect_errno());
+                        }
+                        else {
+                            if ($connection->query("DELETE FROM `users` WHERE email like '$email'") == true) {
+                                echo "<p style='font-family:Helvetica, Arial, sans-serif; font-size:1.5rem; text-align:center; margin:auto; position:relative; right:-10%;'>User deleted successfully </p>";
+                            }
+                        }
+                        $connection->close();
+
+                    } catch(Exception $e) {
+                        echo "Server error. Database is down. Sorry for inconvenience. <br/>";
+                        echo "Information for developers: ".$e;
+                    }
+                }
+            ?>
     </main>
     
 </body>
