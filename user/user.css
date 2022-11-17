@@ -188,3 +188,37 @@ main {
     cursor: pointer;
     opacity: 1;
 }
+
+.admin-options {
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.display-users-button {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 0.85rem;
+    color: whitesmoke;
+    opacity: 0.85;
+    transition: 0.3s;
+    height: 2rem;
+    width: fit-content;
+    border: none;
+    border-radius: 0.25rem;
+    margin: 0.5rem;
+    background-color: rgb(46, 133, 71);
+    margin-bottom: 1.5rem;
+}
+
+.display-users-button:hover {
+    cursor: pointer;
+    opacity: 1;
+}
+
+.users-columns {
+    display: flex;
+    width: 50vw;
+    height: fit-content;
+}

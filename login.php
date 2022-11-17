@@ -31,6 +31,7 @@
                     $_SESSION['email'] = $row['email'];
                     $_SESSION['name'] = $row['name'];
                     $_SESSION['surname'] = $row['surname'];
+                    $_SESSION['role'] = $row['role'];
                     unset($_SESSION['error']);
                     $result->close();
                     header('Location: ./user/user.php');

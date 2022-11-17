@@ -4,6 +4,8 @@
         header('Location: ../index.php');
         exit();
     }
+    require_once "../utility/clearer.php";
+    require_once "../connect.php";
 ?>
 
 
@@ -69,7 +71,93 @@
                 <button type='submit' class='display-reviews-button'>Your reviews</button>
                 <input type='hidden' name='reviews' value='get'> </input>
             </form >
+            <?php
+                if (strlen($_SESSION['role'] == 'admin')) {
+                    echo "<hr class='user-hr'>";
+                    echo "<div class='admin-options'>
+                            <form method='GET' action='user.php'> 
+                                <button type='submit' class='display-users-button'>users</button>
+                                <input type='hidden' name='users' value='get'> </input>
+                            </form >
+                            <form method='GET' action='user.php'> 
+                                <button type='submit' class='display-reviews-button'>books</button>
+                                <input type='hidden' name='reviews' value='get'> </input>
+                            </form >
+                        </div>";
+                }
+            ?>
         </div>
+        <?php 
+                if (isset($_GET['users']) && $_GET['users'] == 'get') {
+                    clearGets();
+                    $_GET['users'] = 'get';
+                    echo "<table class='tg'>
+                                <thead>
+                                    <tr>
+                                        <td class='td-head'>
+                                            email
+                                        </td>
+                                        <td class='td-head'>
+                                            name
+                                        </td>
+                                        <td class='td-head'>
+                                            surname
+                                        </td>
+                                        <td class='td-head'>
+                                            role
+                                        </td>
+                                    </tr>
+                                </thead>
+                            </table>";
+                    try {
+                        $connection = new mysqli($host, $db_user, $db_password, $db_name);
+                        if ($connection->errno != 0) {
+                            throw new Exception(mysqli_connect_errno());
+                        }
+                        else {
+                            $result = $connection->query("SELECT email, `name`, surname, `role` FROM `users`");
+                        }
+
+                        echo "<table class='tg'>
+                                <thead>
+                                    <tr>
+                                        <td class='td-head'>
+                                            email
+                                        </td>
+                                        <td class='td-head'>
+                                            name
+                                        </td>
+                                        <td class='td-head'>
+                                            surname
+                                        </td>
+                                        <td class='td-head'>
+                                            role
+                                        </td>
+                                    </tr>
+                                </thead>
+                                <tbody>";
+
+                        for ($x = 0; $x < $result->num_rows; $x++) {
+                            $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                            echo "<tr>
+                                    <td>".$row['email']."</td>
+                                    <td>".$row['name']."</td>
+                                    <td>".$row['surname']."</td>
+                                    <td>".$row['role']."</td>
+                                </tr>";
+                        }
+                        echo "</tbody>";
+                        echo "</table>";
+                        $result->close();
+                        $connection->close();
+
+                    } catch(Exception $e) {
+                        echo "Server error. Database is down. Sorry for inconvenience. <br/>";
+                        echo "Information for developers: ".$e;
+                    }
+                }
+            
+            ?>
     </main>
     
 </body>
