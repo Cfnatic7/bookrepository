@@ -43,6 +43,15 @@
             <button type='button' onclick='logoutOnClick()' class='logout-button'>Logout</button>
         </div>
     </header>
+    <main>
+        <div class='user-display'>
+            <i class="fa-solid fa-user"></i>
+            <?php
+                echo "<p>".$_SESSION['user']."</p>";
+            ?>
+            <hr class='user-hr'>
+        </div>
+    </main>
     
 </body>
 </html>
