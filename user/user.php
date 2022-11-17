@@ -50,6 +50,25 @@
                 echo "<p>".$_SESSION['user']."</p>";
             ?>
             <hr class='user-hr'>
+            <?php
+                if (strlen($_SESSION['description'] > 0)) {
+                    echo "<p>".$_SESSION['description']."</p>";
+                }
+            ?>
+            <form method='GET' action='user.php'> 
+                <button type='submit' class='change-description-button'>Change description</button>
+                <input type='hidden' name='description' value='change'> </input>
+            </form >
+            <hr class='user-hr'>
+            <form method='GET' action='user.php'> 
+                <button type='submit' class='display-books-button'>Your books</button>
+                <input type='hidden' name='books' value='get'> </input>
+            </form >
+            <hr class='user-hr'>
+            <form method='GET' action='user.php'> 
+                <button type='submit' class='display-reviews-button'>Your reviews</button>
+                <input type='hidden' name='reviews' value='get'> </input>
+            </form >
         </div>
     </main>
     
