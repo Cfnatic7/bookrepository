@@ -107,7 +107,7 @@
                     }
                 ?>
             <div> 
-                <span>email</span>
+                <span>Email</span>
                 <input type='email' name='email' value = "<?php if(isset($_SESSION['rfEmail'])) {
                     echo $_SESSION['rfEmail'];
                     unset($_SESSION['rfEmail']);
