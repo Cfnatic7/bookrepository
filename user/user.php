@@ -91,24 +91,6 @@
                 if (isset($_GET['users']) && $_GET['users'] == 'get') {
                     clearGets();
                     $_GET['users'] = 'get';
-                    echo "<table class='tg'>
-                                <thead>
-                                    <tr>
-                                        <td class='td-head'>
-                                            email
-                                        </td>
-                                        <td class='td-head'>
-                                            name
-                                        </td>
-                                        <td class='td-head'>
-                                            surname
-                                        </td>
-                                        <td class='td-head'>
-                                            role
-                                        </td>
-                                    </tr>
-                                </thead>
-                            </table>";
                     try {
                         $connection = new mysqli($host, $db_user, $db_password, $db_name);
                         if ($connection->errno != 0) {
