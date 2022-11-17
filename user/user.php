@@ -100,7 +100,7 @@
                             $result = $connection->query("SELECT email, `name`, surname, `role` FROM `users`");
                         }
 
-                        echo "<table class='tg'>
+                        echo "<table class='user-table'>
                                 <thead>
                                     <tr>
                                         <td class='td-head'>
@@ -115,6 +115,7 @@
                                         <td class='td-head'>
                                             role
                                         </td>
+                                        <td></td>
                                     </tr>
                                 </thead>
                                 <tbody>";
@@ -126,6 +127,12 @@
                                     <td>".$row['name']."</td>
                                     <td>".$row['surname']."</td>
                                     <td>".$row['role']."</td>
+                                    <td>
+                                        <form method='GET' action='user.php'> 
+                                            <button type='submit' class='display-details-button'>details</button>
+                                            <input type='hidden' name='get-details' value=".$row['email']."> </input>
+                                        </form >
+                                    </td>
                                 </tr>";
                         }
                         echo "</tbody>";
@@ -139,6 +146,68 @@
                     }
                 }
             
+            ?>
+
+            <?php 
+                if (isset($_GET['get-details'])) {
+                    $saveValue = $_GET['get-details'];
+                    clearGets();
+                    $_GET['get-details'] = $saveValue;
+                    try {
+                        $connection = new mysqli($host, $db_user, $db_password, $db_name);
+                        if ($connection->errno != 0) {
+                            throw new Exception(mysqli_connect_errno());
+                        }
+                        else {
+                            $result = $connection->query("SELECT email, `name`, surname, `role`, description FROM `users` WHERE email like '$saveValue'");
+                        }
+
+                        echo "<table class='details-table'>
+                                <thead>
+                                    <tr>
+                                        <td class='td-head'>
+                                            email
+                                        </td>
+                                        <td class='td-head'>
+                                            name
+                                        </td>
+                                        <td class='td-head'>
+                                            surname
+                                        </td>
+                                        <td class='td-head'>
+                                            role
+                                        </td>
+                                        <td style='width:10vw;'>description</td>
+                                        <td></td>
+                                    </tr>
+                                </thead>
+                                <tbody>";
+                        $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                        echo "<tr>
+                                <td>".$row['email']."</td>
+                                <td>".$row['name']."</td>
+                                <td>".$row['surname']."</td>
+                                <td>".$row['role']."</td>
+                                <td style='overflow:auto;'>
+                                    ".$row['description']."
+                                </td>
+                                <td>
+                                    <form method='GET' action='user.php'> 
+                                        <button type='submit' class='remove-user-button'>remove user</button>
+                                        <input type='hidden' name='remove-user' value=".$row['email']."> </input>
+                                    </form >
+                                </td>
+                            </tr>";
+                        echo "</tbody>";
+                        echo "</table>";
+                        $result->close();
+                        $connection->close();
+
+                    } catch(Exception $e) {
+                        echo "Server error. Database is down. Sorry for inconvenience. <br/>";
+                        echo "Information for developers: ".$e;
+                    }
+                }
             ?>
     </main>
     

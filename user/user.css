@@ -90,9 +90,9 @@ header h2 {
 /* main */
 main {
     display: flex;
-    align-items: center;
     height: 100vh;
     flex-direction: row-reverse;
+    align-items: flex-start;
 }
 
 /* user display */
@@ -106,6 +106,7 @@ main {
 .user-display {
     position: relative;
     right: 1.5rem;
+    top: 20%;
     height: fit-content;
     width: 15rem;
     margin: 3rem;
@@ -221,4 +222,122 @@ main {
     display: flex;
     width: 50vw;
     height: fit-content;
+}
+
+/* user table */
+
+.user-table {
+    position: relative;
+    top: 10%;
+    right: 13%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.user-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+
+.user-table th,
+.user-table td {
+    padding: 12px 15px;
+}
+
+.user-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.user-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.user-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.display-details-button {
+    position: relative;
+    top: 8px;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 0.85rem;
+    color: whitesmoke;
+    opacity: 0.85;
+    transition: 0.3s;
+    height: 2rem;
+    width: fit-content;
+    border: none;
+    border-radius: 0.25rem;
+    margin: 0.5rem;
+    background-color: rgb(46, 133, 71);
+    margin-bottom: 1.5rem;
+}
+
+.display-details-button:hover {
+    cursor: pointer;
+    opacity: 1;
+}
+
+/* details */
+
+.details-table {
+    position: relative;
+    top: 10%;
+    right: 13%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.details-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+
+.details-table th,
+.details-table td {
+    padding: 12px 15px;
+}
+
+.details-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.details-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.details-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.remove-user-button {
+    position: relative;
+    top: 8px;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 0.85rem;
+    color: whitesmoke;
+    opacity: 0.85;
+    transition: 0.3s;
+    height: 2rem;
+    width: fit-content;
+    border: none;
+    border-radius: 0.25rem;
+    margin: 0.5rem;
+    background-color: rgb(175, 26, 26);
+    margin-bottom: 1.5rem;
+}
+
+.remove-user-button:hover {
+    cursor: pointer;
+    opacity: 1;
 }
