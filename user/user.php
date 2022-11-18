@@ -80,8 +80,12 @@
                                 <input type='hidden' name='users' value='get'> </input>
                             </form >
                             <form method='GET' action='user.php'> 
-                                <button type='submit' class='display-reviews-button'>books</button>
-                                <input type='hidden' name='reviews' value='get'> </input>
+                                <button type='submit' class='display-authors-button'>authors</button>
+                                <input type='hidden' name='authors' value='get'> </input>
+                            </form >
+                            <form method='GET' action='user.php'> 
+                                <button type='submit' class='display-books-button'>books</button>
+                                <input type='hidden' name='books' value='get'> </input>
                             </form >
                         </div>";
                 }
@@ -231,6 +235,68 @@
                         echo "Information for developers: ".$e;
                     }
                 }
+            ?>
+
+            <?php 
+                if (isset($_GET['authors']) && $_GET['authors'] == 'get' && $_SESSION['role'] == 'admin') {
+                    clearGets();
+                    $_GET['authors'] = 'get';
+                    try {
+                        $connection = new mysqli($host, $db_user, $db_password, $db_name);
+                        if ($connection->errno != 0) {
+                            throw new Exception(mysqli_connect_errno());
+                        }
+                        else {
+                            $result = $connection->query("SELECT id, name, surname, date_of_birth FROM `authors`");
+                        }
+
+                        echo "<table class='authors-table'>
+                                <thead>
+                                    <tr>
+                                        <td class='td-head'>
+                                            name
+                                        </td>
+                                        <td class='td-head'>
+                                            surname
+                                        </td>
+                                        <td class='td-head'>
+                                            date of birth
+                                        </td>
+                                        <td>
+                                            <form method='GET' action='user.php'> 
+                                                <button type='submit' class='add-author-button'>add author</button>
+                                                <input type='hidden' name='add-author' value='get'></input>
+                                            </form >
+                                        </td>
+                                    </tr>
+                                </thead>
+                                <tbody>";
+
+                        for ($x = 0; $x < $result->num_rows; $x++) {
+                            $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                            echo "<tr>
+                                    <td>".$row['name']."</td>
+                                    <td>".$row['surname']."</td>
+                                    <td>".$row['date_of_birth']."</td>
+                                    <td>
+                                        <form method='GET' action='user.php'> 
+                                            <button type='submit' class='display-author-details-button'>details</button>
+                                            <input type='hidden' name='get-author-details' value=".$row['id']."> </input>
+                                        </form >
+                                    </td>
+                                </tr>";
+                        }
+                        echo "</tbody>";
+                        echo "</table>";
+                        $result->close();
+                        $connection->close();
+
+                    } catch(Exception $e) {
+                        echo "Server error. Database is down. Sorry for inconvenience. <br/>";
+                        echo "Information for developers: ".$e;
+                    }
+                }
+            
             ?>
     </main>
     

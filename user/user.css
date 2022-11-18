@@ -163,9 +163,30 @@ main {
     border-radius: 0.25rem;
     margin: 0.5rem;
     background-color: rgb(46, 133, 71);
+    margin-bottom: 1.5rem;
 }
 
 .display-books-button:hover {
+    cursor: pointer;
+    opacity: 1;
+}
+
+.display-authors-button {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 0.85rem;
+    color: whitesmoke;
+    opacity: 0.85;
+    transition: 0.3s;
+    height: 2rem;
+    width: fit-content;
+    border: none;
+    border-radius: 0.25rem;
+    margin: 0.5rem;
+    background-color: rgb(46, 133, 71);
+    margin-bottom: 1.5rem;
+}
+
+.display-authors-button:hover {
     cursor: pointer;
     opacity: 1;
 }
@@ -283,7 +304,7 @@ main {
     opacity: 1;
 }
 
-/* details */
+/* user details */
 
 .details-table {
     position: relative;
@@ -338,6 +359,84 @@ main {
 }
 
 .remove-user-button:hover {
+    cursor: pointer;
+    opacity: 1;
+}
+
+/* authors */
+
+.authors-table {
+    position: relative;
+    top: 10%;
+    right: 13%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.authors-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+
+.authors-table th,
+.authors-table td {
+    padding: 12px 15px;
+}
+
+.authors-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.authors-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.authors-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.add-author-button {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 0.85rem;
+    color: whitesmoke;
+    opacity: 0.85;
+    transition: 0.3s;
+    height: 2rem;
+    width: fit-content;
+    border: none;
+    border-radius: 0.25rem;
+    margin: 0.5rem;
+    background-color: rgb(20, 49, 107);
+}
+
+.add-author-button:hover {
+    cursor: pointer;
+    opacity: 1;
+}
+
+.display-author-details-button {
+    position: relative;
+    top: 8px;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 0.85rem;
+    color: whitesmoke;
+    opacity: 0.85;
+    transition: 0.3s;
+    height: 2rem;
+    width: fit-content;
+    border: none;
+    border-radius: 0.25rem;
+    margin: 0.5rem;
+    background-color: rgb(46, 133, 71);
+    margin-bottom: 1.5rem;
+}
+
+.display-author-details-button:hover {
     cursor: pointer;
     opacity: 1;
 }
