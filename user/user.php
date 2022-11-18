@@ -88,7 +88,7 @@
             ?>
         </div>
         <?php 
-                if (isset($_GET['users']) && $_GET['users'] == 'get') {
+                if (isset($_GET['users']) && $_GET['users'] == 'get' && $_SESSION['role'] == 'admin') {
                     clearGets();
                     $_GET['users'] = 'get';
                     try {
@@ -130,7 +130,7 @@
                                     <td>
                                         <form method='GET' action='user.php'> 
                                             <button type='submit' class='display-details-button'>details</button>
-                                            <input type='hidden' name='get-details' value=".$row['email']."> </input>
+                                            <input type='hidden' name='get-user-details' value=".$row['email']."> </input>
                                         </form >
                                     </td>
                                 </tr>";
@@ -149,10 +149,10 @@
             ?>
 
             <?php 
-                if (isset($_GET['get-details'])) {
-                    $saveValue = $_GET['get-details'];
+                if (isset($_GET['get-user-details'])  && $_SESSION['role'] == 'admin') {
+                    $saveValue = $_GET['get-user-details'];
                     clearGets();
-                    $_GET['get-details'] = $saveValue;
+                    $_GET['get-user-details'] = $saveValue;
                     try {
                         $connection = new mysqli($host, $db_user, $db_password, $db_name);
                         if ($connection->errno != 0) {
@@ -211,7 +211,7 @@
             ?>
 
             <?php 
-                if (isset($_GET['remove-user'])) {
+                if (isset($_GET['remove-user']) && $_SESSION['role'] == 'admin') {
                     $email = $_GET['remove-user'];
                     clearGets();
                     try {

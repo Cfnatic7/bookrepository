@@ -5,7 +5,7 @@
         unset($_GET['reviews']);
         unset($_GET['users']);
         unset($_GET['reviews']);
-        unset($_GET['get-details']);
+        unset($_GET['get-user-details']);
         unset($_GET['remove-user']);
     }
 
