@@ -309,9 +309,9 @@
                             throw new Exception(mysqli_connect_errno());
                         }
                         $id = $_GET['get-author-details'];
-                        $query = "SELECT name, surname, date_of_birth, short_biography FROM `authors`
+                        $query = "SELECT id, name, surname, date_of_birth, short_biography FROM `authors`
                         WHERE id = '$id'";
-                        $result = $connection->query("SELECT name, surname, date_of_birth, short_biography FROM `authors`
+                        $result = $connection->query("SELECT id, name, surname, date_of_birth, short_biography FROM `authors`
                         WHERE id = '$id'");
                         $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
@@ -322,11 +322,11 @@
                                 <p>".$row['surname']."</p>
                                 <p class='author-details-title'>date_of_birth</p>
                                 <p>".$row['date_of_birth']."</p>
-                                <p class='author-details-title'>short biopgraphy</p>
+                                <p class='author-details-title'>short biography</p>
                                 <p>".$row['short_biography']."</p>
                                 <form method='GET' action='user.php'> 
                                     <button type='submit' class='edit-author-details-button'>edit</button>
-                                    <input type='hidden' name='edit-author-details' value='get'> </input>
+                                    <input type='hidden' name='edit-author-details' value=".$row['id']."> </input>
                                 </form >
                             </div>";
                         $result->close();
@@ -336,6 +336,26 @@
                         echo "Server error. Database is down. Sorry for inconvenience. <br/>";
                         echo "Information for developers: ".$e;
                     }
+                }
+            ?>
+
+            <?php 
+                if (isset($_GET['edit-author-details']) && $_SESSION['role'] == 'admin') {
+                    $save = $_GET['edit-author-details'];
+                    clearGets();
+                    $_GET['edit-author-details'] = $save;
+                    echo "<form class='edit-author-form' method='POST' action='user.php'>
+                        <div>
+                            <label for='author-name'>Name</label>
+                            <input type='text' id='author-name' name='author-name'></input>
+                        </div>
+                            
+                            <label for='author-surname'>Surname</label>
+                            <input type='text' id='author-surname' name='author-surname'></input>
+                            <label for='author-birth-date'>Birth date</label>
+                            <input type='date' id='author-birth-date' name='author-birth-date'></input>
+                            <button type='submit'>edit author</button>
+                        </form>";
                 }
             ?>
     </main>

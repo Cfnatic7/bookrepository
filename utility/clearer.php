@@ -9,6 +9,7 @@
         unset($_GET['remove-user']);
         unset($_GET['add-author']);
         unset($_GET['get-author-details']);
+        unset($_GET['edit-author-details']);
     }
 
 
