@@ -296,7 +296,47 @@
                         echo "Information for developers: ".$e;
                     }
                 }
-            
+            ?>
+
+            <?php 
+                if (isset($_GET['get-author-details']) && $_SESSION['role'] == 'admin') {
+                    $save = $_GET['get-author-details'];
+                    clearGets();
+                    $_GET['get-author-details'] = $save;
+                    try {
+                        $connection = new mysqli($host, $db_user, $db_password, $db_name);
+                        if ($connection->errno != 0) {
+                            throw new Exception(mysqli_connect_errno());
+                        }
+                        $id = $_GET['get-author-details'];
+                        $query = "SELECT name, surname, date_of_birth, short_biography FROM `authors`
+                        WHERE id = '$id'";
+                        $result = $connection->query("SELECT name, surname, date_of_birth, short_biography FROM `authors`
+                        WHERE id = '$id'");
+                        $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+
+                        echo "<div class = 'author-details'>
+                                <p class='author-details-title'>name</p>
+                                <p>".$row['name']."</p>
+                                <p class='author-details-title'>surname</p>
+                                <p>".$row['surname']."</p>
+                                <p class='author-details-title'>date_of_birth</p>
+                                <p>".$row['date_of_birth']."</p>
+                                <p class='author-details-title'>short biopgraphy</p>
+                                <p>".$row['short_biography']."</p>
+                                <form method='GET' action='user.php'> 
+                                    <button type='submit' class='edit-author-details-button'>edit</button>
+                                    <input type='hidden' name='edit-author-details' value='get'> </input>
+                                </form >
+                            </div>";
+                        $result->close();
+                        $connection->close();
+
+                    } catch(Exception $e) {
+                        echo "Server error. Database is down. Sorry for inconvenience. <br/>";
+                        echo "Information for developers: ".$e;
+                    }
+                }
             ?>
     </main>
     
