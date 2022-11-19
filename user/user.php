@@ -224,7 +224,8 @@
                             throw new Exception(mysqli_connect_errno());
                         }
                         else {
-                            if ($connection->query("DELETE FROM `users` WHERE email like '$email'") == true) {
+                            $connection->query("DELETE FROM `users` WHERE email like '$email'");
+                            if ($result == true) {
                                 echo "<p style='font-family:Helvetica, Arial, sans-serif; font-size:1.5rem; text-align:center; margin:auto; position:relative; right:-10%;'>User deleted successfully </p>";
                             }
                         }
@@ -316,13 +317,13 @@
                         $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
                         echo "<div class = 'author-details'>
-                                <p class='author-details-title'>name</p>
+                                <p class='author-details-title'>Name</p>
                                 <p>".$row['name']."</p>
-                                <p class='author-details-title'>surname</p>
+                                <p class='author-details-title'>Surname</p>
                                 <p>".$row['surname']."</p>
-                                <p class='author-details-title'>date_of_birth</p>
+                                <p class='author-details-title'>Date of birth</p>
                                 <p>".$row['date_of_birth']."</p>
-                                <p class='author-details-title'>short biography</p>
+                                <p class='author-details-title'>Short biography</p>
                                 <p>".$row['short_biography']."</p>
                                 <form method='GET' action='user.php'> 
                                     <button type='submit' class='edit-author-details-button'>edit</button>
@@ -341,22 +342,61 @@
 
             <?php 
                 if (isset($_GET['edit-author-details']) && $_SESSION['role'] == 'admin') {
-                    $save = $_GET['edit-author-details'];
+                    $id = $_GET['edit-author-details'];
                     clearGets();
-                    $_GET['edit-author-details'] = $save;
-                    echo "<form class='edit-author-form' method='POST' action='user.php'>
-                        <div>
-                            <label for='author-name'>Name</label>
-                            <input type='text' id='author-name' name='author-name'></input>
-                        </div>
-                            
-                            <label for='author-surname'>Surname</label>
-                            <input type='text' id='author-surname' name='author-surname'></input>
-                            <label for='author-birth-date'>Birth date</label>
-                            <input type='date' id='author-birth-date' name='author-birth-date'></input>
-                            <button type='submit'>edit author</button>
-                        </form>";
+                    $_GET['edit-author-details'] = $id;
+                    try {
+                        $connection = new mysqli($host, $db_user, $db_password, $db_name);
+                        if ($connection->errno != 0) {
+                            throw new Exception(mysqli_connect_errno());
+                        }
+                        $query = "SELECT id, name, surname, date_of_birth, short_biography FROM `authors`
+                        WHERE id = '$id'";
+                        $result = $connection->query("SELECT id, name, surname, date_of_birth, short_biography FROM `authors`
+                        WHERE id = '$id'");
+                        $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                        echo "<form class='edit-author-form' method='POST' action='edit-author.php'>
+                                <div>
+                                    <label for='author-name'>Name</label>
+                                    <input type='text' id='author-name' name='author-name' value = ".$row['name']."></input>
+                                </div>
+                                <div>
+                                    <label for='author-surname'>Surname</label>
+                                    <input type='text' id='author-surname' name='author-surname' value = ".$row['surname']."></input>
+                                </div>
+                                <div>
+                                    <label for='short-biography'>Short biography</label>
+                                    <textarea type='text' id='short-biography' name='short-biography'>".$row['short_biography']."</textarea>
+                                </div>
+                                <div>
+                                    <label for='author-birth-date'>Birth date</label>
+                                    <input type='date' id='author-birth-date' name='author-birth-date' value = ".$row['date_of_birth']."></input>
+                                </div>
+                                    <button type='submit'>edit author</button>
+                                    <input type='hidden' name='author-id' value = ".$row['id']."></input>
+                                </form>";
+
+                        
+
+                        $result->close();
+                        $connection->close();
+                    } catch (Exception $e) {
+                        echo "Server error. Database is down. Sorry for inconvenience. <br/>";
+                        echo "Information for developers: ".$e;
+                    }
+
                 }
+            ?>
+
+            <?php 
+                if (isset($_SESSION['author-edit-result']) && $_SESSION['author-edit-result'] == true) {
+                    echo "<h3 style='margin-top: 10rem; font-family: Helvetica, Arial, sans-serif; position: relative; right: 20rem;'>Author edited successfully</h3>";
+                }
+                else if (isset($_SESSION['author-edit-result']) && $_SESSION['author-edit-result'] == false) {
+                    echo "<h3 style='margin-top: 10rem; font-family: Helvetica, Arial, sans-serif; position: relative; right: 20rem;'>Couldn't edit author</h3>";
+                }
+                unset($_SESSION['author-edit-result']);
+            
             ?>
     </main>
     
