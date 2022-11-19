@@ -608,3 +608,127 @@ textarea {
     cursor: pointer;
     opacity: 1;
 }
+
+/* books table */
+
+.books-table {
+    position: relative;
+    top: 10%;
+    right: 13%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.books-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+
+.books-table th,
+.books-table td {
+    padding: 12px 15px;
+}
+
+.books-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.books-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.books-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.add-book-button {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 0.85rem;
+    color: whitesmoke;
+    opacity: 0.85;
+    transition: 0.3s;
+    height: 2rem;
+    width: fit-content;
+    border: none;
+    border-radius: 0.25rem;
+    margin: 0.5rem;
+    background-color: rgb(20, 49, 107);
+}
+
+.add-book-button:hover {
+    cursor: pointer;
+    opacity: 1;
+}
+
+.display-book-details-button {
+    position: relative;
+    top: 8px;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 0.85rem;
+    color: whitesmoke;
+    opacity: 0.85;
+    transition: 0.3s;
+    height: 2rem;
+    width: fit-content;
+    border: none;
+    border-radius: 0.25rem;
+    margin: 0.5rem;
+    background-color: rgb(46, 133, 71);
+    margin-bottom: 1.5rem;
+}
+
+.display-book-details-button:hover {
+    cursor: pointer;
+    opacity: 1;
+}
+
+.book-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: #86bc9d;
+    border-radius: 1rem;
+    width: 40vw;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    position: relative;
+    right: 10%;
+}
+
+.book-details p {
+    color:black;
+    font-family: Helvetica, Arial, sans-serif;
+    text-align: left;
+    font-size: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.book-details-title {
+    font-weight: bold;
+}
+
+.edit-book-details-button {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 0.85rem;
+    color: black;
+    opacity: 0.85;
+    transition: 0.3s;
+    height: 2rem;
+    width: 5rem;
+    border: none;
+    border-radius: 0.25rem;
+    margin: 0.9rem;
+    background-color: rgb(216, 220, 5);
+}
+
+.edit-book-details-button:hover {
+    cursor: pointer;
+    opacity: 1;
+}

@@ -10,6 +10,8 @@
         unset($_GET['add-author']);
         unset($_GET['get-author-details']);
         unset($_GET['edit-author-details']);
+        unset($_GET['add-book']);
+        unset($_GET['get-book-details']);
     }
 
 
