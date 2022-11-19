@@ -398,6 +398,42 @@
                 unset($_SESSION['author-edit-result']);
             
             ?>
+
+            <?php 
+                if (isset($_GET['add-author']) && $_GET['add-author'] == 'get' && $_SESSION['role'] == 'admin') {
+                    clearGets();
+                    $_GET['add-author'] = 'get';
+                    echo "<form class='add-author-form' method='POST' action='add-author.php'>
+                            <div>
+                                <label for='author-name'>Name</label>
+                                <input type='text' id='author-name' name='author-name'></input>
+                            </div>
+                            <div>
+                                <label for='author-surname'>Surname</label>
+                                <input type='text' id='author-surname' name='author-surname'></input>
+                            </div>
+                            <div>
+                                <label for='short-biography'>Short biography</label>
+                                <textarea type='text' id='short-biography' name='short-biography'></textarea>
+                            </div>
+                            <div>
+                                <label for='author-birth-date'>Birth date</label>
+                                <input type='date' id='author-birth-date' name='author-birth-date'></input>
+                            </div>
+                                <button type='submit'>add author</button>
+                        </form>";
+                }
+            ?>
+
+            <?php 
+                if (isset($_SESSION['author-add-result']) && $_SESSION['author-add-result'] == true) {
+                    echo "<h3 style='margin-top: 10rem; font-family: Helvetica, Arial, sans-serif; position: relative; right: 20rem;'>Author added successfully</h3>";
+                }
+                else if (isset($_SESSION['author-add-result']) && $_SESSION['author-add-result'] == false) {
+                    echo "<h3 style='margin-top: 10rem; font-family: Helvetica, Arial, sans-serif; position: relative; right: 20rem;'>Couldn't add author</h3>";
+                }
+                unset($_SESSION['author-add-result']);
+            ?>
     </main>
     
 </body>
