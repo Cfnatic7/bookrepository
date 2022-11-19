@@ -500,6 +500,82 @@
                     }
                 }
             ?>
+
+            <?php 
+                if (isset($_GET['add-book']) && $_GET['add-book'] == 'get' && $_SESSION['role'] == 'admin') {
+                    clearGets();
+                    $_GET['add-book'] = 'get';
+                    try {
+                        $connection = new mysqli($host, $db_user, $db_password, $db_name);
+                        if ($connection->errno != 0) {
+                            throw new Exception(mysqli_connect_errno());
+                        }
+                        $result = $connection->query("SELECT id, surname FROM `authors`");
+                        echo "<form class='add-book-form' method='POST' action='add-book.php'>
+                                <div>
+                                    <label for='book-title'>Title</label>
+                                    <input type='text' id='book-title' name='book-title'></input>
+                                </div>
+                                <div>
+                                    <label for='book-pages'>Pages</label>
+                                    <input type='number' min='1' max='1000000' id='book-pages' name='book-pages'></input>
+                                </div>
+                                <div>
+                                    <label for='date-of-release'>Date of release</label>
+                                    <input type='date' id='date-of-release' name='date-of-release'></input>
+                                </div>
+                                <div>
+                                    <label for='genres'>Genres</label>
+                                    <select name='genres[]' id='genres' multiple>
+                                        <option value='fantasy'>fantasy</option>
+                                        <option value='sci-fi'>sci-fi</option>
+                                        <option value='thriller'>thriller</option>
+                                        <option value='romance'>romance</option>
+                                        <option value='horror'>horror</option>
+                                        <option value='contemporary'>contemporary</option>
+                                        <option value='dystopian'>dystopian</option>
+                                        <option value='historical'>historical</option>
+                                        <option value='development'>development</option>
+                                        <option value='motivation'>motivation</option>
+                                        <option value='art'>art</option>
+                                        <option value='cookbook'>cookbook</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for='authors'>Authors</label>
+                                    <select name = 'authors[]' id = 'authors' multiple>";
+                                    for ($i = 0; $i < $result->num_rows; $i++) {
+                                        $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                                        echo "<option value=".$row['id'].">".$row['surname']."</option>";
+                                    }
+
+                            echo "</select>
+                                </div>
+                                <div>
+                                    <label for='description'>Description</label>
+                                    <textarea type='text' name='description' id = 'description'></textarea>
+                                </div>
+                                    <button type='submit'>add book</button>
+                            </form>";
+                        $connection->close();
+                        $result->close();
+                    } catch(Exception $e) {
+                        echo "Server error. Database is down. Sorry for inconvenience. <br/>";
+                        echo "Information for developers: ".$e;
+                    }
+                }
+            ?>
+
+            <?php 
+                if (isset($_SESSION['book-add-result']) && $_SESSION['book-add-result'] == true) {
+                    echo "<h3 style='margin-top: 10rem; font-family: Helvetica, Arial, sans-serif; position: relative; right: 20rem;'>Book added successfully</h3>";
+                }
+                else if (isset($_SESSION['book-add-result']) && $_SESSION['book-add-result'] == false) {
+                    echo "<h3 style='margin-top: 10rem; font-family: Helvetica, Arial, sans-serif; position: relative; right: 20rem;'>Couldn't add book</h3>";
+                }
+                unset($_SESSION['book-add-result']);
+            ?>
+
     </main>
     
 </body>
