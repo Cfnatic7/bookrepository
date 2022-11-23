@@ -639,6 +639,48 @@
                 }
             ?>
 
+            <?php 
+                if (isset($_GET['get-book-details'])) {
+                    $save = $_GET['get-book-details'];
+                    clearGets();
+                    $_GET['get-book-details'] = $save;
+                    try {
+                        $connection = new mysqli($host, $db_user, $db_password, $db_name);
+                        if ($connection->errno != 0) {
+                            throw new Exception(mysqli_connect_errno());
+                        }
+                        $id = $_GET['get-book-details'];
+                        $query = "SELECT id, title, pages, date_of_release, genres, description FROM `books`
+                        WHERE id = '$id'";
+                        $result = $connection->query($query);
+                        $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+
+                        echo "<div class = 'book-details'>
+                                <p class='book-details-title'>Title</p>
+                                <p>".$row['title']."</p>
+                                <p class='book-details-title'>Pages</p>
+                                <p>".$row['pages']."</p>
+                                <p class='book-details-title'>Date of release</p>
+                                <p>".$row['date_of_release']."</p>
+                                <p class='book-details-title'>Short biography</p>
+                                <p>".$row['genres']."</p>
+                                <p class='book-details-title'>Description</p>
+                                <p>".$row['description']."</p>
+                                <form method='GET' action='user.php'> 
+                                    <button type='submit' class='review-book-button'>Write a review</button>
+                                    <input type='hidden' name='review-book' value=".$row['id']."> </input>
+                                </form >
+                            </div>";
+                        $result->close();
+                        $connection->close();
+
+                    } catch(Exception $e) {
+                        echo "Server error. Database is down. Sorry for inconvenience. <br/>";
+                        echo "Information for developers: ".$e;
+                    }
+                }
+            ?>
+
     </main>
     
 </body>

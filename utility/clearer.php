@@ -13,6 +13,7 @@
         unset($_GET['add-book']);
         unset($_GET['get-book-details']);
         unset($_GET['book-search']);
+        unset($_GET['review']);
     }
 
 
