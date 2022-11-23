@@ -32,8 +32,8 @@
             </h2>
         </div>
 
-        <form method='GET' action='search-books.php' id='search-books'> 
-            <input type = 'text' placeholder='search books'> 
+        <form method='GET' action='user.php' id='search-books'> 
+            <input type = 'text' name = 'book-search' placeholder='search books'> 
 
             </input>
             <button type='submit' id='search-books-button'>
@@ -574,6 +574,69 @@
                     echo "<h3 style='margin-top: 10rem; font-family: Helvetica, Arial, sans-serif; position: relative; right: 20rem;'>Couldn't add book</h3>";
                 }
                 unset($_SESSION['book-add-result']);
+            ?>
+
+            <?php 
+                if (isset($_GET['book-search'])) {
+                    $saveBookSearch = $_GET['book-search'];
+                    clearGets();
+                    $_GET['book-search'] = $saveBookSearch;
+                    try {
+                        $connection = new mysqli($host, $db_user, $db_password, $db_name);
+                        if ($connection->errno != 0) {
+                            throw new Exception(mysqli_connect_errno());
+                        }
+                        else {
+                            $result = $connection->query("SELECT id, title, pages, date_of_release, genres
+                            FROM `books` WHERE title LIKE '%".$saveBookSearch."%'");
+                        }
+
+                        echo "<table class='books-table'>
+                                <thead>
+                                    <tr>
+                                        <td class='td-head'>
+                                            Title
+                                        </td>
+                                        <td class='td-head'>
+                                            Number of pages
+                                        </td>
+                                        <td class='td-head'>
+                                            date of release
+                                        </td>
+                                        <td class='td-head'>
+                                            genres
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                </thead>
+                                <tbody>";
+
+                        for ($x = 0; $x < $result->num_rows; $x++) {
+                            $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                            echo "<tr>
+                                    <td>".$row['title']."</td>
+                                    <td>".$row['pages']."</td>
+                                    <td>".$row['date_of_release']."</td>
+                                    <td>".$row['genres']."</td>
+                                    <td>
+                                        <form method='GET' action='user.php'> 
+                                            <button type='submit' class='display-book-details-button'>details</button>
+                                            <input type='hidden' name='get-book-details' value=".$row['id']."> </input>
+                                        </form >
+                                    </td>
+                                </tr>";
+                        }
+                        echo "</tbody>";
+                        echo "</table>";
+                        $result->close();
+                        $connection->close();
+
+                    } catch(Exception $e) {
+                        echo "Server error. Database is down. Sorry for inconvenience. <br/>";
+                        echo "Information for developers: ".$e;
+                    }
+                }
             ?>
 
     </main>
