@@ -17,6 +17,7 @@
         unset($_GET['review-book']);
         unset($_GET['get-review-details']);
         unset($_GET['reviews']);
+        unset($_GET['edit-review-details']);
     }
 
 

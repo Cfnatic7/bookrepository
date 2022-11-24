@@ -727,11 +727,9 @@
                         if ($connection->errno != 0) {
                             throw new Exception(mysqli_connect_errno());
                         }
-                        else {
-                            $result = $connection->query("SELECT `reviews`.id, user_id, book_id, rating, `reviews`.title as review_title, 
-                            `books`.title as book_title FROM `reviews` JOIN `books` ON `books`.id = `reviews`.book_id
-                            WHERE user_id LIKE ".$_SESSION['id']."");
-                        }
+                        $result = $connection->query("SELECT `reviews`.id, user_id, book_id, rating, `reviews`.title as review_title, 
+                        `books`.title as book_title FROM `reviews` JOIN `books` ON `books`.id = `reviews`.book_id
+                        WHERE user_id LIKE ".$_SESSION['id']."");
 
                         echo "<table class='reviews-table'>
                                 <thead>
@@ -783,26 +781,29 @@
                 if (isset($_GET['get-review-details'])) {
                     $id = $_GET['get-review-details'];
                     clearGets();
-                    $_GET['get-review-details'] = $save;
+                    $_GET['get-review-details'] = $id;
                     try {
                         $connection = new mysqli($host, $db_user, $db_password, $db_name);
                         if ($connection->errno != 0) {
                             throw new Exception(mysqli_connect_errno());
                         }
                         $id = $_GET['get-review-details'];
-                        $result = $connection->query("SELECT rating, title, review FROM `reviews`
-                        WHERE id = '$id'");
+                        $result = $connection->query("SELECT `reviews`.id as id, rating, `reviews`.title as review_title, 
+                        `books`.title as book_title, review FROM `reviews` JOIN `books` ON `books`.id = `reviews`.book_id
+                        WHERE `reviews`.id LIKE ".$id."");
                         $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
                         echo "<div class = 'review-details'>
+                                <p class='review-details-title'>Book</p>
+                                <p>".$row['book_title']."</p>
                                 <p class='review-details-title'>Title</p>
-                                <p>".$row['title']."</p>
+                                <p>".$row['review_title']."</p>
                                 <p class='review-details-title'>Rating</p>
                                 <p>".$row['rating']."</p>
                                 <p class='review-details-title'>Review</p>
-                                <p>".$row['short_biography']."</p>
+                                <p>".$row['review']."</p>
                                 <form method='GET' action='user.php'> 
-                                    <button type='submit' class='edit-review-details-button'>edit</button>
+                                    <button type='submit' class='edit-review-details-button'>edit review</button>
                                     <input type='hidden' name='edit-review-details' value=".$row['id']."> </input>
                                 </form >
                             </div>";
