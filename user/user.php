@@ -817,6 +817,58 @@
                 }
             ?>
 
+            <?php 
+                if (isset($_GET['edit-review-details']) && $_SESSION['role'] == 'admin') {
+                    $id = $_GET['edit-review-details'];
+                    clearGets();
+                    $_GET['edit-review-details'] = $id;
+                    try {
+                        $connection = new mysqli($host, $db_user, $db_password, $db_name);
+                        if ($connection->errno != 0) {
+                            throw new Exception(mysqli_connect_errno());
+                        }
+                        $result = $connection->query("SELECT rating, title, review FROM `reviews`
+                        WHERE id LIKE ".$id."");
+                        $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                        echo "<form class='edit-review-form' method='POST' action='edit-review.php'>
+                                <div>
+                                    <label for='review-title'>Title</label>
+                                    <input type='text' id='review-title' name='review-title' value = ".$row['title']."></input>
+                                </div>
+                                <div>
+                                    <label for='review-rating'>Rating</label>
+                                    <input type='number' step='0.1' min = '1' max = '10' id='review-rating' name='review-rating' value = ".$row['rating']."></input>
+                                </div>
+                                <div>
+                                    <label for='review'>Review</label>
+                                    <textarea type='text' id='review' name='review'>".$row['review']."</textarea>
+                                </div>
+                                    <button type='submit'>edit review</button>
+                                    <input type='hidden' name='review-id' value = ".$id."></input>
+                                </form>";
+
+                        
+
+                        $result->close();
+                        $connection->close();
+                    } catch (Exception $e) {
+                        echo "Server error. Database is down. Sorry for inconvenience. <br/>";
+                        echo "Information for developers: ".$e;
+                    }
+
+                }
+            ?>
+
+            <?php 
+                if (isset($_SESSION['review-edit-result']) && $_SESSION['review-edit-result'] == true) {
+                    echo "<h3 style='margin-top: 10rem; font-family: Helvetica, Arial, sans-serif; position: relative; right: 20rem;'>Review edited successfully</h3>";
+                }
+                else if (isset($_SESSION['review-edit-result']) && $_SESSION['review-edit-result'] == false) {
+                    echo "<h3 style='margin-top: 10rem; font-family: Helvetica, Arial, sans-serif; position: relative; right: 20rem;'>Couldn't edit review</h3>";
+                }
+                unset($_SESSION['review-edit-result']);
+            ?>
+
     </main>
     
 </body>
