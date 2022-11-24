@@ -17,13 +17,12 @@
             throw new Exception(mysqli_connect_errno());
         }
         $query = "INSERT INTO `reviews` VALUES(NULL, '$userId', '$bookId', '$bookRating', '$reviewTitle', '$review')";
-        $connection->query($query);
+        $_SESSION['add-review-success'] = $connection->query($query);
         $connection->close();
         unset($_POST['review-title']);
         unset($_POST['book-rating']);
         unset($_POST['review']);
         unset($_POST['book-id']);
-        $_SESSION['add-review-success'] = true;
         header('Location: ../index.php');
     } catch (Exception $e) {
         echo "Server error. Database is down. Sorry for inconvenience. <br/>";
