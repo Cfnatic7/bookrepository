@@ -688,6 +688,16 @@
             ?>
 
             <?php 
+                if (isset($_SESSION['add-to-favorites-result']) && $_SESSION['add-to-favorites-result'] == true) {
+                    echo "<h3 style='margin-top: 10rem; font-family: Helvetica, Arial, sans-serif; position: relative; right: 20rem;'>Book added to favorites</h3>";
+                }
+                else if (isset($_SESSION['add-to-favorites-result']) && $_SESSION['add-to-favorites-result'] == false) {
+                    echo "<h3 style='margin-top: 10rem; font-family: Helvetica, Arial, sans-serif; position: relative; right: 20rem;'>Couldn't add book to favorites</h3>";
+                }
+                unset($_SESSION['add-to-favorites-result']);
+            ?>
+
+            <?php 
                 if (isset($_GET['review-book'])) {
                     echo $_SESSION['id'];
                     $saveId = $_GET['review-book'];
