@@ -779,6 +779,43 @@
                 }
             ?>
 
+            <?php 
+                if (isset($_GET['get-review-details'])) {
+                    $id = $_GET['get-review-details'];
+                    clearGets();
+                    $_GET['get-review-details'] = $save;
+                    try {
+                        $connection = new mysqli($host, $db_user, $db_password, $db_name);
+                        if ($connection->errno != 0) {
+                            throw new Exception(mysqli_connect_errno());
+                        }
+                        $id = $_GET['get-review-details'];
+                        $result = $connection->query("SELECT rating, title, review FROM `reviews`
+                        WHERE id = '$id'");
+                        $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+
+                        echo "<div class = 'review-details'>
+                                <p class='review-details-title'>Title</p>
+                                <p>".$row['title']."</p>
+                                <p class='review-details-title'>Rating</p>
+                                <p>".$row['rating']."</p>
+                                <p class='review-details-title'>Review</p>
+                                <p>".$row['short_biography']."</p>
+                                <form method='GET' action='user.php'> 
+                                    <button type='submit' class='edit-review-details-button'>edit</button>
+                                    <input type='hidden' name='edit-review-details' value=".$row['id']."> </input>
+                                </form >
+                            </div>";
+                        $result->close();
+                        $connection->close();
+
+                    } catch(Exception $e) {
+                        echo "Server error. Database is down. Sorry for inconvenience. <br/>";
+                        echo "Information for developers: ".$e;
+                    }
+                }
+            ?>
+
     </main>
     
 </body>
