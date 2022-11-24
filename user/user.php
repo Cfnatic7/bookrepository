@@ -916,13 +916,13 @@
             ?>
 
             <?php 
-                if (isset($_SESSION['author-edit-result']) && $_SESSION['author-edit-result'] == true) {
-                    echo "<h3 style='margin-top: 10rem; font-family: Helvetica, Arial, sans-serif; position: relative; right: 20rem;'>Author edited successfully</h3>";
+                if (isset($_SESSION['description-edit-result']) && $_SESSION['description-edit-result'] == true) {
+                    echo "<h3 style='margin-top: 10rem; font-family: Helvetica, Arial, sans-serif; position: relative; right: 20rem;'>Description edited successfully</h3>";
                 }
-                else if (isset($_SESSION['author-edit-result']) && $_SESSION['author-edit-result'] == false) {
-                    echo "<h3 style='margin-top: 10rem; font-family: Helvetica, Arial, sans-serif; position: relative; right: 20rem;'>Couldn't edit author</h3>";
+                else if (isset($_SESSION['description-edit-result']) && $_SESSION['description-edit-result'] == false) {
+                    echo "<h3 style='margin-top: 10rem; font-family: Helvetica, Arial, sans-serif; position: relative; right: 20rem;'>Couldn't edit description</h3>";
                 }
-                unset($_SESSION['author-edit-result']);
+                unset($_SESSION['description-edit-result']);
             ?>
 
     </main>
