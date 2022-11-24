@@ -665,10 +665,17 @@
                                 <p>".$row['genres']."</p>
                                 <p class='book-details-description'>Description</p>
                                 <p>".$row['description']."</p>
-                                <form method='GET' action='user.php'> 
-                                    <button type='submit' class='review-book-button'>Write a review</button>
-                                    <input type='hidden' name='review-book' value=".$row['id']."> </input>
-                                </form >
+                                <div class = 'book-details-buttons'>
+                                    <form method='GET' action='user.php'> 
+                                        <button type='submit' class='review-book-button'>Write a review</button>
+                                        <input type='hidden' name='review-book' value=".$row['id']."> </input>
+                                    </form >
+                                    <form method='GET' action='add-to-favorites.php'> 
+                                        <button type='submit' class='add-book-to-favorites-button'>Add to favorites</button>
+                                        <input type='hidden' name='add-book-to-favorites' value=".$row['id']."> </input>
+                                    </form >
+                                </div>
+
                             </div>";
                         $result->close();
                         $connection->close();
