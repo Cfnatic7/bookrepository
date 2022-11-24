@@ -25,7 +25,7 @@
                 $row = $result->fetch_assoc();
                 if (password_verify($password, $row['password']) == true) {
                     $_SESSION['loggedIn'] = true;
-                    $_SESSION['id'] = $row->id;
+                    $_SESSION['id'] = $row['id'];
                     $_SESSION['user'] = $row['login'];
                     $_SESSION['description'] = $row['description'];
                     $_SESSION['email'] = $row['email'];

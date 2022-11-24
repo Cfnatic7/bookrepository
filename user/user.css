@@ -816,6 +816,22 @@ textarea {
     font-weight: bold;
 }
 
+.book-details-pages {
+    font-weight: bold;
+}
+
+.book-details-date_of_release {
+    font-weight: bold;
+}
+
+.book-details-genres {
+    font-weight: bold;
+}
+
+.book-details-description {
+    font-weight: bold;
+}
+
 .review-book-button {
     font-family: Helvetica, Arial, sans-serif;
     font-size: 0.85rem;
@@ -831,6 +847,60 @@ textarea {
 }
 
 .review-book-button:hover {
+    cursor: pointer;
+    opacity: 1;
+}
+
+/* review book form */
+
+
+.review-book-form textarea {
+    resize: vertical;
+    width: 30rem;
+    height: 10rem;
+}
+
+.review-book-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    background-color: #86bc9d;
+    border-radius: 1rem;
+    min-width: 30vw;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    position: relative;
+    right: 15%;
+}
+
+.review-book-form div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.review-book-form label {
+    font-family: Helvetica, Arial, sans-serif;
+    margin-left: 0.5rem;
+}
+
+.review-book-form button {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 0.85rem;
+    color: whitesmoke;
+    opacity: 0.85;
+    transition: 0.3s;
+    height: 2rem;
+    width: 5rem;
+    border: none;
+    border-radius: 0.25rem;
+    margin: 0.9rem;
+    background-color: rgb(20, 49, 107);
+}
+
+.review-book-form button:hover {
     cursor: pointer;
     opacity: 1;
 }

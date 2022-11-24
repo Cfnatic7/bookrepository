@@ -658,13 +658,13 @@
                         echo "<div class = 'book-details'>
                                 <p class='book-details-title'>Title</p>
                                 <p>".$row['title']."</p>
-                                <p class='book-details-title'>Pages</p>
+                                <p class='book-details-pages'>Pages</p>
                                 <p>".$row['pages']."</p>
-                                <p class='book-details-title'>Date of release</p>
+                                <p class='book-details-date_of_release'>Date of release</p>
                                 <p>".$row['date_of_release']."</p>
-                                <p class='book-details-title'>Short biography</p>
+                                <p class='book-details-genres'>Genres</p>
                                 <p>".$row['genres']."</p>
-                                <p class='book-details-title'>Description</p>
+                                <p class='book-details-description'>Description</p>
                                 <p>".$row['description']."</p>
                                 <form method='GET' action='user.php'> 
                                     <button type='submit' class='review-book-button'>Write a review</button>
@@ -679,6 +679,43 @@
                         echo "Information for developers: ".$e;
                     }
                 }
+            ?>
+
+            <?php 
+                if (isset($_GET['review-book'])) {
+                    echo $_SESSION['id'];
+                    $saveId = $_GET['review-book'];
+                    clearGets();
+                    $_GET['review-book'] = $saveId;
+                    echo "<form class='review-book-form' method='POST' action='review-book.php'>
+                            <div>
+                                <label for='review-title'>Title</label>
+                                <input type='text' id='review-title' name='review-title'
+                                minlength='1' maxlength='255'></input>
+                            </div>
+                            <div>
+                                <label for='book-rating'>Rating</label>
+                                <input type='number' min='1' max='10' step='0.1' id='book-rating' name='book-rating'></input>
+                            </div>
+                            <div>
+                                <label for='review'>Review</label>
+                                <textarea id='review' name='review'></textarea>
+                            </div>
+                            <input type='hidden' name='book-id' value = ".$saveId."> </input>
+                                <button type='submit'>post review</button>
+                        </form>";
+                    echo $_SESSION['id'];
+                }
+            ?>
+
+            <?php 
+                if (isset($_SESSION['add-review-success']) && $_SESSION['add-review-success'] == true) {
+                    echo "<h3 style='margin-top: 10rem; font-family: Helvetica, Arial, sans-serif; position: relative; right: 20rem;'>Review added successfully</h3>";
+                }
+                else if (isset($_SESSION['add-review-success']) && $_SESSION['add-review-success'] == false) {
+                    echo "<h3 style='margin-top: 10rem; font-family: Helvetica, Arial, sans-serif; position: relative; right: 20rem;'>Couldn't add Review</h3>";
+                }
+                unset($_SESSION['add-review-success']);
             ?>
 
     </main>
