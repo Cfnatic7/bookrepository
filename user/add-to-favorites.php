@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    if (!isset($_SESSION['loggedIn']) || !isset($_seSSION['role']) || $_SESSION['role'] != 'admin') {
+    if (!isset($_SESSION['loggedIn'])) {
         header('Location: ../index.php');
         exit();
     }
@@ -20,7 +20,9 @@
         header('Location: ../index.php');
     } catch (Exception $e) {
         echo "Server error. Database is down. Sorry for inconvenience. <br/>";
-        echo "Information for developers: ".$e;
+        echo "Information for developers: ".$e."<br/>";
+        echo $bookId."book <br/>";
+        echo $userId."user <br/>";
     }
 
 ?>

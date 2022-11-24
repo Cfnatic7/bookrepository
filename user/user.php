@@ -670,7 +670,7 @@
                                         <button type='submit' class='review-book-button'>Write a review</button>
                                         <input type='hidden' name='review-book' value=".$row['id']."> </input>
                                     </form >
-                                    <form method='GET' action='add-to-favorites.php'> 
+                                    <form method='POST' action='add-to-favorites.php'> 
                                         <button type='submit' class='add-book-to-favorites-button'>Add to favorites</button>
                                         <input type='hidden' name='add-book-to-favorites' value=".$row['id']."> </input>
                                     </form >
