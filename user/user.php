@@ -59,7 +59,7 @@
             ?>
             <form method='GET' action='user.php'> 
                 <button type='submit' class='change-description-button'>Change description</button>
-                <input type='hidden' name='description' value='change'> </input>
+                <input type='hidden' name='change-description' value='change'> </input>
             </form >
             <hr class='user-hr'>
             <form method='GET' action='user.php'> 
@@ -884,6 +884,45 @@
                     echo "<h3 style='margin-top: 10rem; font-family: Helvetica, Arial, sans-serif; position: relative; right: 20rem;'>Couldn't edit review</h3>";
                 }
                 unset($_SESSION['review-edit-result']);
+            ?>
+
+            <?php 
+                if (isset($_GET['change-description']) && $_GET['change-description'] == 'change') {
+                    clearGets();
+                    $_GET['change-description'] = 'change';
+                    try {
+                        $connection = new mysqli($host, $db_user, $db_password, $db_name);
+                        if ($connection->errno != 0) {
+                            throw new Exception(mysqli_connect_errno());
+                        }
+                        $query = "SELECT description FROM `users` WHERE id = ".$_SESSION['id']."";
+                        $result = $connection->query($query);
+                        $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                        echo "<form class='edit-description-form' method='POST' action='edit-description.php'>
+                                <div>
+                                    <label for='new-description'>New description</label>
+                                    <textarea type='text' id='new-description' name='new-description'>".$row['description']."</textarea>
+                                </div>
+                                    <button type='submit'>edit description</button>
+                                </form>";
+                        $result->close();
+                        $connection->close();
+                    } catch (Exception $e) {
+                        echo "Server error. Database is down. Sorry for inconvenience. <br/>";
+                        echo "Information for developers: ".$e;
+                    }
+
+                }
+            ?>
+
+            <?php 
+                if (isset($_SESSION['author-edit-result']) && $_SESSION['author-edit-result'] == true) {
+                    echo "<h3 style='margin-top: 10rem; font-family: Helvetica, Arial, sans-serif; position: relative; right: 20rem;'>Author edited successfully</h3>";
+                }
+                else if (isset($_SESSION['author-edit-result']) && $_SESSION['author-edit-result'] == false) {
+                    echo "<h3 style='margin-top: 10rem; font-family: Helvetica, Arial, sans-serif; position: relative; right: 20rem;'>Couldn't edit author</h3>";
+                }
+                unset($_SESSION['author-edit-result']);
             ?>
 
     </main>
