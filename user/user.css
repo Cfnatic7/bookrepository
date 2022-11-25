@@ -885,7 +885,7 @@ textarea {
     opacity: 0.85;
     transition: 0.3s;
     height: 2rem;
-    width: 5rem;
+    width: fit-content;
     border: none;
     border-radius: 0.25rem;
     margin: 0.9rem;
