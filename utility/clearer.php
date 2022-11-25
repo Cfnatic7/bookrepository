@@ -19,6 +19,7 @@
         unset($_GET['reviews']);
         unset($_GET['edit-review-details']);
         unset($_GET['add-book-to-favorites']);
+        unset($_GET['get-favorite-books']);
     }
 
 

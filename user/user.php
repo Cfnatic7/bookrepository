@@ -63,8 +63,8 @@
             </form >
             <hr class='user-hr'>
             <form method='GET' action='user.php'> 
-                <button type='submit' class='display-books-button'>Your books</button>
-                <input type='hidden' name='books' value='get'> </input>
+                <button type='submit' class='display-favorite-books-button'>Your books</button>
+                <input type='hidden' name='get-favorite-books' value='get'> </input>
             </form >
             <hr class='user-hr'>
             <form method='GET' action='user.php'> 
@@ -923,6 +923,70 @@
                     echo "<h3 style='margin-top: 10rem; font-family: Helvetica, Arial, sans-serif; position: relative; right: 20rem;'>Couldn't edit description</h3>";
                 }
                 unset($_SESSION['description-edit-result']);
+            ?>
+
+            <?php 
+                if (isset($_GET['get-favorite-books']) && $_GET['get-favorite-books'] == 'get') {
+                    clearGets();
+                    $_GET['get-favorite-books'] = 'get';
+                    try {
+                        $connection = new mysqli($host, $db_user, $db_password, $db_name);
+                        if ($connection->errno != 0) {
+                            throw new Exception(mysqli_connect_errno());
+                        }
+                        else {
+                            $result = $connection->query("SELECT `favorite_books`.book_id as book_id, `books`.title as title, 
+                            `books`.pages as pages, `books`.date_of_release as date_of_release, `books`.genres as genres, `favorite_books`.user_id as user_id
+                            FROM `favorite_books` JOIN `books` ON `favorite_books`.book_id = `books`.id 
+                            WHERE user_id = ".$_SESSION['id']."");
+                        }
+
+                        echo "<table class='books-table'>
+                                <thead>
+                                    <tr>
+                                        <td class='td-head'>
+                                            Title
+                                        </td>
+                                        <td class='td-head'>
+                                            Number of pages
+                                        </td>
+                                        <td class='td-head'>
+                                            Date of release
+                                        </td>
+                                        <td class='td-head'>
+                                            genres
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                </thead>
+                                <tbody>";
+
+                        for ($x = 0; $x < $result->num_rows; $x++) {
+                            $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                            echo "<tr>
+                                    <td>".$row['title']."</td>
+                                    <td>".$row['pages']."</td>
+                                    <td>".$row['date_of_release']."</td>
+                                    <td>".$row['genres']."</td>
+                                    <td>
+                                        <form method='GET' action='user.php'> 
+                                            <button type='submit' class='display-book-details-button'>details</button>
+                                            <input type='hidden' name='get-book-details' value=".$row['book_id']."> </input>
+                                        </form >
+                                    </td>
+                                </tr>";
+                        }
+                        echo "</tbody>";
+                        echo "</table>";
+                        $result->close();
+                        $connection->close();
+
+                    } catch(Exception $e) {
+                        echo "Server error. Database is down. Sorry for inconvenience. <br/>";
+                        echo "Information for developers: ".$e;
+                    }
+                }
             ?>
 
     </main>
