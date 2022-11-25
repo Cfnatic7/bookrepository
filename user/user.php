@@ -101,12 +101,10 @@
                         write reviews, rate and create your own database of favorite positions. All that happens with 
                         collaborations of other users who can see your review and ratings. Enjoy!
                     </p>
-            
                 </div>";
         }
-        
-        
         ?>
+
         <?php 
                 if (isset($_GET['users']) && $_GET['users'] == 'get' && $_SESSION['role'] == 'admin') {
                     clearGets();
@@ -1105,11 +1103,10 @@
             <!-- Watermark container -->
             <div class="watermark__inner">
                 <!-- The watermark -->
-                <div class="watermark__body">Draft</div>
+                <div class="watermark__body">Book repository</div>
             </div>
 
             <!-- Other content -->
-            ...
         </div>
 
     </main>

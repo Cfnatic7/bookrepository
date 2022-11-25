@@ -161,7 +161,15 @@
                 <button type='submit' id='register'>Register</button>
             </div>
         </form>
+        <div class="watermark">
+            <!-- Watermark container -->
+            <div class="watermark__inner">
+                <!-- The watermark -->
+                <div class="watermark__body">Book repository</div>
+            </div>
 
+            <!-- Other content -->
+        </div>
     </main>
     <footer>
         Copyright &copy; Book repository 2022. All rights reserved.

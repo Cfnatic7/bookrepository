@@ -216,6 +216,46 @@ textarea {
     cursor: pointer;
 }
 
+/* watermark */
+
+.watermark {
+    /* Absolute position */
+    left: 24rem;
+    position: absolute;
+    top: 19rem;
+    z-index: -1;
+}
+
+.watermark__inner {
+    /* Center the content */
+    align-items: center;
+    display: flex;
+    justify-content: center;
+
+    /* Take full size */
+    height: 100%;
+    width: 100%;
+}
+
+.watermark__body {
+    /* Text color */
+    color: rgba(0, 0, 0, 0.2);
+
+    /* Text styles */
+    font-size: 7rem;
+    font-weight: bold;
+    text-transform: uppercase;
+
+    /* Rotate the text */
+    transform: rotate(45deg);
+    font-family: 'Caveat', cursive;
+
+    /* Disable the selection */
+    user-select: none;
+}
+
+/* footer */
+
 footer {
     width: 100vw;
     height:10vh;

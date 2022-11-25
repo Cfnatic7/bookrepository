@@ -1,3 +1,9 @@
+/* global */
+
+tr {
+    background-color: white;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -302,7 +308,7 @@ main {
 .user-table {
     position: relative;
     top: 10%;
-    right: 13%;
+    right: 9.5%;
     border-collapse: collapse;
     margin: 25px 0;
     font-size: 0.9em;
@@ -361,7 +367,7 @@ main {
 .details-table {
     position: relative;
     top: 10%;
-    right: 13%;
+    right: 4.5%;
     border-collapse: collapse;
     margin: 25px 0;
     font-size: 0.9em;
@@ -420,7 +426,7 @@ main {
 .authors-table {
     position: relative;
     top: 10%;
-    right: 13%;
+    right: 15%;
     border-collapse: collapse;
     margin: 25px 0;
     font-size: 0.9em;
@@ -623,7 +629,7 @@ textarea {
     margin-top: 5rem;
     margin-bottom: 5rem;
     position: relative;
-    right: 15%;
+    right: 7%;
 }
 
 .add-author-form div {
@@ -662,7 +668,7 @@ textarea {
 .books-table {
     position: relative;
     top: 10%;
-    right: 13%;
+    right: 9%;
     border-collapse: collapse;
     margin: 25px 0;
     font-size: 0.9em;
@@ -746,7 +752,7 @@ textarea {
     margin-top: 5rem;
     margin-bottom: 5rem;
     position: relative;
-    right: 10%;
+    right: 7.5%;
 }
 
 .book-details p {
@@ -801,7 +807,8 @@ textarea {
     margin-top: 5rem;
     margin-bottom: 5rem;
     position: relative;
-    right: 15%;
+    right: 7%;
+    margin-bottom: 10rem;
 }
 
 .add-book-form div {
@@ -983,7 +990,7 @@ textarea {
     margin-top: 5rem;
     margin-bottom: 5rem;
     position: relative;
-    right: 15%;
+    right: 9.5%;
 }
 
 .review-book-form div {
@@ -1022,7 +1029,7 @@ textarea {
 .reviews-table {
     position: relative;
     top: 10%;
-    right: 13%;
+    right: 15%;
     border-collapse: collapse;
     margin: 25px 0;
     font-size: 0.9em;
@@ -1089,7 +1096,7 @@ textarea {
     margin-top: 5rem;
     margin-bottom: 5rem;
     position: relative;
-    right: 10%;
+    right: 7.5%;
 }
 
 .review-details-buttons {
@@ -1170,7 +1177,7 @@ textarea {
     margin-top: 5rem;
     margin-bottom: 5rem;
     position: relative;
-    right: 15%;
+    right: 9.5%;
 }
 
 .edit-review-form div {
@@ -1224,7 +1231,7 @@ textarea {
     margin-top: 5rem;
     margin-bottom: 5rem;
     position: relative;
-    right: 15%;
+    right: 11%;
 }
 
 .edit-description-form div {
@@ -1264,8 +1271,11 @@ textarea {
 /* watermark */
 
 .watermark {
-    /* Used to position the watermark */
-    position: relative;
+    /* Absolute position */
+    left: 24rem;
+    position: absolute;
+    top: 19rem;
+    z-index: -1;
 }
 
 .watermark__inner {
@@ -1273,11 +1283,6 @@ textarea {
     align-items: center;
     display: flex;
     justify-content: center;
-
-    /* Absolute position */
-    left: 0px;
-    position: absolute;
-    top: 30rem;
 
     /* Take full size */
     height: 100%;
@@ -1294,7 +1299,7 @@ textarea {
     text-transform: uppercase;
 
     /* Rotate the text */
-    transform: rotate(-45deg);
+    transform: rotate(45deg);
     font-family: 'Caveat', cursive;
 
     /* Disable the selection */
