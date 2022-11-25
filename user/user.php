@@ -831,7 +831,8 @@
                             throw new Exception(mysqli_connect_errno());
                         }
                         $id = $_GET['get-review-details'];
-                        $result = $connection->query("SELECT `reviews`.id as id, rating, `reviews`.title as review_title, 
+                        $result = $connection->query("SELECT `reviews`.id as id, `reviews`.user_id as user_id, 
+                        rating, `reviews`.title as review_title, 
                         `books`.title as book_title, review FROM `reviews` JOIN `books` ON `books`.id = `reviews`.book_id
                         WHERE `reviews`.id LIKE ".$id."");
                         $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
@@ -844,12 +845,21 @@
                                 <p class='review-details-title'>Rating</p>
                                 <p>".$row['rating']."</p>
                                 <p class='review-details-title'>Review</p>
-                                <p>".$row['review']."</p>
-                                <form method='GET' action='user.php'> 
-                                    <button type='submit' class='edit-review-details-button'>edit review</button>
-                                    <input type='hidden' name='edit-review-details' value=".$row['id']."> </input>
-                                </form >
-                            </div>";
+                                <p>".$row['review']."</p>";
+                                if ($_SESSION['id'] == $row['user_id']) {
+                                    echo "<div class = 'review-details-buttons'>
+                                            <form method='GET' action='user.php'> 
+                                                <button type='submit' class='edit-review-details-button'>edit review</button>
+                                                <input type='hidden' name='edit-review-details' value=".$row['id']."> </input>
+                                            </form >
+                                            <form method='POST' action='remove-review.php'> 
+                                                <button type='submit' class='remove-review-button'>remove review</button>
+                                                <input type='hidden' name='remove-review' value=".$row['id']."> </input>
+                                            </form>
+                                        </div>";
+                                }
+
+                            echo "</div>";
                         $result->close();
                         $connection->close();
 
