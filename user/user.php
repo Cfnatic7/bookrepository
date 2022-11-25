@@ -652,6 +652,8 @@
                         $query = "SELECT id, title, pages, date_of_release, genres, description FROM `books`
                         WHERE id = '$id'";
                         $result = $connection->query($query);
+                        $resultFavorites = $connection->query("SELECT id from `favorite_books`
+                        WHERE book_id = '$id'");
                         $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
                         echo "<div class = 'book-details'>
@@ -669,12 +671,22 @@
                                     <form method='GET' action='user.php'> 
                                         <button type='submit' class='review-book-button'>Write a review</button>
                                         <input type='hidden' name='review-book' value=".$row['id']."> </input>
-                                    </form >
-                                    <form method='POST' action='add-to-favorites.php'> 
-                                        <button type='submit' class='add-book-to-favorites-button'>Add to favorites</button>
-                                        <input type='hidden' name='add-book-to-favorites' value=".$row['id']."> </input>
-                                    </form >
-                                </div>
+                                    </form >";
+
+                                    if ($resultFavorites->num_rows == 0) {
+                                        echo "<form method='POST' action='add-to-favorites.php'> 
+                                                <button type='submit' class='add-book-to-favorites-button'>Add to favorites</button>
+                                                <input type='hidden' name='add-book-to-favorites' value=".$row['id']."> </input>
+                                            </form >";
+                                    }
+                                    else {
+                                        echo "<form method='POST' action='remove-from-favorites.php'> 
+                                                <button type='submit' class='remove-from-favorites-button'>Remove from favorites</button>
+                                                <input type='hidden' name='remove-from-favorites' value=".$row['id']."> </input>
+                                            </form >";
+                                    }
+                                    
+                        echo "</div>
 
                             </div>";
                         $result->close();
@@ -695,6 +707,16 @@
                     echo "<h3 style='margin-top: 10rem; font-family: Helvetica, Arial, sans-serif; position: relative; right: 20rem;'>Couldn't add book to favorites</h3>";
                 }
                 unset($_SESSION['add-to-favorites-result']);
+            ?>
+
+            <?php 
+                if (isset($_SESSION['remove-from-favorites-result']) && $_SESSION['remove-from-favorites-result'] == true) {
+                    echo "<h3 style='margin-top: 10rem; font-family: Helvetica, Arial, sans-serif; position: relative; right: 20rem;'>Book removed from favorites</h3>";
+                }
+                else if (isset($_SESSION['remove-from-favorites-result']) && $_SESSION['remove-from-favorites-result'] == false) {
+                    echo "<h3 style='margin-top: 10rem; font-family: Helvetica, Arial, sans-serif; position: relative; right: 20rem;'>Couldn't remove book from favorites</h3>";
+                }
+                unset($_SESSION['remove-from-favorites-result']);
             ?>
 
             <?php 
