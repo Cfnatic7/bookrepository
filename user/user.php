@@ -91,6 +91,22 @@
                 }
             ?>
         </div>
+
+        <?php 
+        if (isset($_SESSION['initiate-view']) && $_SESSION['initiate-view'] == true) {
+            echo "<div class='initial-view'>
+                    <h2>Hello there!</h2>
+                    <p>
+                        I welcome you dearly to your own remove library. Here you can search for interesting books,
+                        write reviews, rate and create your own database of favorite positions. All that happens with 
+                        collaborations of other users who can see your review and ratings. Enjoy!
+                    </p>
+            
+                </div>";
+        }
+        
+        
+        ?>
         <?php 
                 if (isset($_GET['users']) && $_GET['users'] == 'get' && $_SESSION['role'] == 'admin') {
                     clearGets();
@@ -1085,7 +1101,21 @@
                 }
             ?>
 
+        <div class="watermark">
+            <!-- Watermark container -->
+            <div class="watermark__inner">
+                <!-- The watermark -->
+                <div class="watermark__body">Draft</div>
+            </div>
+
+            <!-- Other content -->
+            ...
+        </div>
+
     </main>
+    <footer>
+        Copyright &copy; Book repository 2022. All rights reserved.
+    </footer>
     
 </body>
 </html>

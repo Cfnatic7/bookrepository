@@ -99,9 +99,37 @@ main {
     align-items: flex-start;
 }
 
+/* initial view */
+
+.initial-view {
+    position: relative;
+    right: 7%;
+    top: 20%;
+    height: 14rem;
+    width: 34rem;
+    margin: 3rem;
+    background-color: rgb(46, 133, 71);
+    display: flex;
+    flex-direction: column;
+    border-radius: 2rem;
+    align-items: center;
+}
+
+.initial-view h2 {
+    color: whitesmoke;
+    font-family: 'Caveat', cursive;
+    margin: 1rem;
+}
+
+.initial-view p {
+    color: whitesmoke;
+    font-family: Helvetica, Arial, sans-serif;
+    margin: 1rem;
+}
+
 /* user display */
 
-.user-display i{
+.user-display i {
     margin-top: 1rem;
     font-size: 3.5rem;
     color: whitesmoke;
@@ -1230,4 +1258,62 @@ textarea {
 .edit-description-form button:hover {
     cursor: pointer;
     opacity: 1;
+}
+
+
+/* watermark */
+
+.watermark {
+    /* Used to position the watermark */
+    position: relative;
+}
+
+.watermark__inner {
+    /* Center the content */
+    align-items: center;
+    display: flex;
+    justify-content: center;
+
+    /* Absolute position */
+    left: 0px;
+    position: absolute;
+    top: 30rem;
+
+    /* Take full size */
+    height: 100%;
+    width: 100%;
+}
+
+.watermark__body {
+    /* Text color */
+    color: rgba(0, 0, 0, 0.2);
+
+    /* Text styles */
+    font-size: 7rem;
+    font-weight: bold;
+    text-transform: uppercase;
+
+    /* Rotate the text */
+    transform: rotate(-45deg);
+    font-family: 'Caveat', cursive;
+
+    /* Disable the selection */
+    user-select: none;
+}
+
+
+/* footer */
+
+footer {
+    width: 100vw;
+    height:10vh;
+    bottom: 0;
+    position: fixed;
+    z-index: 1;
+    background-color: #381172;
+    color: gainsboro;
+    display: flex;
+    height: 7vh;
+    align-items: center;
+    justify-content: center;
 }

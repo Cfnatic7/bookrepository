@@ -1,5 +1,6 @@
 <?php 
     function clearGets() {
+        unset($_SESSION['initiate-view']);
         unset($_GET['change-description']);
         unset($_GET['books']);
         unset($_GET['reviews']);
