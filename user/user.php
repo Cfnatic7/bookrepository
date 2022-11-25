@@ -685,6 +685,10 @@
                                                 <input type='hidden' name='remove-from-favorites' value=".$row['id']."> </input>
                                             </form >";
                                     }
+                                echo "<form method='GET' action='user.php'> 
+                                        <button type='submit' class='get-book-reviews-button'>Reviews</button>
+                                        <input type='hidden' name='get-book-reviews' value=".$row['id']."> </input>
+                                    </form >";
                                     
                         echo "</div>
 
@@ -995,6 +999,66 @@
                                         <form method='GET' action='user.php'> 
                                             <button type='submit' class='display-book-details-button'>details</button>
                                             <input type='hidden' name='get-book-details' value=".$row['book_id']."> </input>
+                                        </form >
+                                    </td>
+                                </tr>";
+                        }
+                        echo "</tbody>";
+                        echo "</table>";
+                        $result->close();
+                        $connection->close();
+
+                    } catch(Exception $e) {
+                        echo "Server error. Database is down. Sorry for inconvenience. <br/>";
+                        echo "Information for developers: ".$e;
+                    }
+                }
+            ?>
+
+            <?php 
+                if (isset($_GET['get-book-reviews'])) {
+                    $bookId = $_GET['get-book-reviews'];
+                    clearGets();
+                    $_GET['get-book-reviews'] = $bookId;
+                    try {
+                        $connection = new mysqli($host, $db_user, $db_password, $db_name);
+                        if ($connection->errno != 0) {
+                            throw new Exception(mysqli_connect_errno());
+                        }
+                        $result = $connection->query("SELECT `reviews`.id, user_id, book_id, rating, `reviews`.title as review_title, 
+                        `books`.title as book_title FROM `reviews` JOIN `books` ON `books`.id = `reviews`.book_id
+                        WHERE book_id LIKE '$bookId'");
+
+                        echo "<table class='reviews-table'>
+                                <thead>
+                                    <tr>
+                                        <td class='td-head'>
+                                            Title
+                                        </td>
+                                        <td class='td-head'>
+                                            Rating
+                                        </td>
+                                        <td class='td-head'>
+                                            Book title
+                                        </td>
+                                        <td class='td-head'>
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                </thead>
+                                <tbody>";
+
+                        for ($x = 0; $x < $result->num_rows; $x++) {
+                            $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                            echo "<tr>
+                                    <td>".$row['review_title']."</td>
+                                    <td>".$row['rating']."</td>
+                                    <td>".$row['book_title']."</td>
+                                    <td>
+                                        <form method='GET' action='user.php'> 
+                                            <button type='submit' class='display-review-details-button'>details</button>
+                                            <input type='hidden' name='get-review-details' value=".$row['id']."> </input>
                                         </form >
                                     </td>
                                 </tr>";
