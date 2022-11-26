@@ -102,6 +102,7 @@
                         collaborations of other users who can see your review and ratings. Enjoy!
                     </p>
                 </div>";
+            unset($_SESSION['initiate-view']);
         }
         ?>
 
